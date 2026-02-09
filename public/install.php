@@ -747,7 +747,7 @@ ENV;
                 
             </div>
         </div>
-        <p class="text-center mt-3" style="color:rgba(255,255,255,.4);font-size:.8rem">SIJSEMSS Installer v1.0 &bull; Laravel <?= app()->version ?? '12' ?></p>
+        <p class="text-center mt-3" style="color:rgba(255,255,255,.4);font-size:.8rem">SIJSEMSS Installer v1.0 &bull; Laravel 12</p>
     </div>
 
     <script>
