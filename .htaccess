@@ -1,6 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
+    # Don't rewrite if already pointing to public/
+    RewriteCond %{REQUEST_URI} !^/public/
+    
     # Redirect all requests to public/ folder
-    RewriteRule ^(.*)$ public/$1 [L]
+    RewriteRule ^(.*)$ public/$1 [L,QSA]
 </IfModule>

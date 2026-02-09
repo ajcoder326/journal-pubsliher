@@ -753,6 +753,7 @@ ENV;
     <script>
     let currentStep = 1;
     let dbTested = false;
+    const INSTALL_URL = window.location.pathname; // Always post to self
     
     // ── Step Navigation ─────────────────────────────────────────────────────
     function goToStep(step) {
@@ -789,14 +790,26 @@ ENV;
     // ── Check Requirements on Load ──────────────────────────────────────────
     async function checkRequirements() {
         try {
-            const resp = await fetch('install.php', {
+            const resp = await fetch(INSTALL_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'action=check_requirements'
             });
-            const data = await resp.json();
+            
+            const text = await resp.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch(parseErr) {
+                // Response was not JSON - show raw for debugging
+                document.getElementById('requirements-list').innerHTML = 
+                    '<div class="alert alert-danger"><strong>Server returned invalid response.</strong><br><small>Status: ' + resp.status + '</small><br><pre style="max-height:200px;overflow:auto;font-size:.75rem;margin-top:8px">' + text.substring(0, 1000).replace(/</g,'&lt;') + '</pre></div>' +
+                    '<div class="mt-2"><button class="btn btn-warning btn-sm" onclick="document.getElementById(\'btn-step1-next\').disabled=false">Continue Anyway</button></div>';
+                return;
+            }
             
             let html = '';
+            let criticalFail = false;
             data.checks.forEach(check => {
                 const icon = check.passed 
                     ? '<div class="icon pass"><i class="fas fa-check"></i></div>' 
@@ -806,18 +819,25 @@ ENV;
                     <span class="name">${check.name}</span>
                     <span class="value">${check.current}</span>
                 </div>`;
+                // Only PHP version, PDO, PDO MySQL are critical
+                if (!check.passed && (check.name.includes('PHP Version') || check.name.includes('PDO'))) {
+                    criticalFail = true;
+                }
             });
             
             document.getElementById('requirements-list').innerHTML = html;
-            document.getElementById('btn-step1-next').disabled = !data.allPassed;
+            document.getElementById('btn-step1-next').disabled = false; // Always allow proceeding
             
             if (!data.allPassed) {
-                document.getElementById('requirements-list').innerHTML += 
-                    '<div class="alert alert-danger mt-3"><i class="fas fa-exclamation-triangle me-1"></i> Some requirements are not met. Please fix them before continuing.</div>';
+                let msg = criticalFail 
+                    ? '<div class="alert alert-danger mt-3"><i class="fas fa-exclamation-triangle me-1"></i> Critical requirements are missing. Installation may fail.</div>'
+                    : '<div class="alert alert-warning mt-3"><i class="fas fa-exclamation-triangle me-1"></i> Some non-critical requirements are not met. You can still proceed — fix these later if needed.</div>';
+                document.getElementById('requirements-list').innerHTML += msg;
             }
         } catch (e) {
             document.getElementById('requirements-list').innerHTML = 
-                '<div class="alert alert-danger">Failed to check requirements: ' + e.message + '</div>';
+                '<div class="alert alert-danger">Failed to check requirements: ' + e.message + '<br><small>URL: ' + INSTALL_URL + '</small></div>' +
+                '<div class="mt-2"><button class="btn btn-warning btn-sm" onclick="document.getElementById(\'btn-step1-next\').disabled=false">Skip & Continue Anyway</button></div>';
         }
     }
     
@@ -841,7 +861,7 @@ ENV;
                 db_pass: document.getElementById('db_pass').value,
             });
             
-            const resp = await fetch('install.php', { method: 'POST', body: params });
+            const resp = await fetch(INSTALL_URL, { method: 'POST', body: params });
             const data = await resp.json();
             
             if (data.success) {
@@ -917,8 +937,12 @@ ENV;
                 admin_password: document.getElementById('admin_password')?.value || '',
             });
             
-            const resp = await fetch('install.php', { method: 'POST', body: params });
-            const data = await resp.json();
+            const resp = await fetch(INSTALL_URL, { method: 'POST', body: params });
+            const text = await resp.text();
+            let data;
+            try { data = JSON.parse(text); } catch(e) {
+                throw new Error('Invalid server response: ' + text.substring(0, 300));
+            }
             
             document.getElementById('install-progress').style.display = 'none';
             document.getElementById('install-result').style.display = 'block';
