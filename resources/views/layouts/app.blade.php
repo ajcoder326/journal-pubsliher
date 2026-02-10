@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'SIJSEMSS - Share International Journal')</title>
+    <title>@yield('title', 'SHARE IJ - Share International Journal')</title>
     <meta name="description" content="Share International Journal of Sustainable Engineering, Management and Social Sciences - A multidisciplinary, peer-reviewed, open access scholarly journal.">
 
     <!-- Google Fonts -->
@@ -31,11 +31,13 @@
 
         * { box-sizing: border-box; }
 
+        html, body { overflow-x: hidden; max-width: 100vw; }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text-dark);
             background: #fff;
-            line-height: 1.7;
+            line-height: 1.5;
         }
 
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
@@ -174,6 +176,22 @@
             .hero-section { padding: 50px 0; }
             .hero-section h1 { font-size: 1.8rem; }
         }
+        @media (max-width: 767px) {
+            .hero-section { padding: 30px 0; }
+            .hero-section h1 { font-size: 1.5rem; }
+            .hero-section .lead { font-size: 0.95rem; }
+            .hero-section .btn { font-size: 0.85rem; padding: 8px 16px; }
+            .top-bar .d-flex { flex-wrap: wrap; gap: 4px; }
+            .top-bar span { font-size: 0.7rem; }
+            .navbar-brand { font-size: 1rem !important; }
+            .navbar-brand small { display: none; }
+            .section-title { font-size: 1.3rem; }
+            .card-body { padding: 1rem; }
+            .footer-section { padding: 30px 0 !important; }
+            .footer-section h5 { font-size: 1rem; }
+            table { font-size: 0.85rem; }
+            .container { padding-left: 12px; padding-right: 12px; }
+        }
 
         .status-badge { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
         .text-muted-light { color: rgba(255,255,255,0.7) !important; }
@@ -192,7 +210,7 @@
                 <span class="mx-2">|</span>
                 <span>ISSN: Applied</span>
                 <span class="mx-2">|</span>
-                <span>Frequency: Monthly</span>
+                <span>Frequency: Monthly e-Journal</span>
             </div>
             <div>
                 <a href="{{ route('author-guidelines') }}" class="me-3">Author Guidelines</a>
@@ -205,7 +223,7 @@
     <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <i class="fas fa-book-open me-2 text-primary"></i>SIJSEMSS
+                <i class="fas fa-book-open me-2 text-primary"></i>SHARE IJ
                 <small>Share International Journal of Sustainable Engineering, Management &amp; Social Sciences</small>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -215,7 +233,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('editorial-board') ? 'active' : '' }}" href="{{ route('editorial-board') }}">Editorial Board</a></li>
+                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('editorial-board') ? 'active' : '' }}" href="{{ route('editorial-board') }}">Editorial Team</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{ request()->routeIs('call-for-papers') || request()->routeIs('author-guidelines') || request()->routeIs('research-areas') ? 'active' : '' }}" href="#" data-bs-toggle="dropdown">For Authors</a>
                         <ul class="dropdown-menu">
@@ -224,10 +242,13 @@
                             <li><a class="dropdown-item" href="{{ route('research-areas') }}"><i class="fas fa-microscope me-2 text-muted"></i>Subject Areas</a></li>
                             <li><a class="dropdown-item" href="{{ route('submission-workflow') }}"><i class="fas fa-tasks me-2 text-muted"></i>Submission Workflow</a></li>
                             <li><a class="dropdown-item" href="{{ route('apc') }}"><i class="fas fa-coins me-2 text-muted"></i>Publication Charges</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/downloads/copyright-form.pdf"><i class="fas fa-file-contract me-2 text-muted"></i>Copyright Form Download</a></li>
+                            <li><a class="dropdown-item" href="/downloads/paper-format.docx"><i class="fas fa-file-word me-2 text-muted"></i>Paper Format Download</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('volumes.*') ? 'active' : '' }}" href="{{ route('volumes.index') }}">Archives</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('blog.*') ? 'active' : '' }}" href="{{ route('blog.index') }}">News</a></li>
+
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a></li>
                 </ul>
                 <div class="ms-lg-3">
@@ -242,7 +263,7 @@
                                 @if(Auth::user()->role === 'admin')
                                     <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt me-2"></i>Admin Panel</a></li>
                                 @elseif(in_array(Auth::user()->role, ['editor', 'editor_in_chief']))
-                                    <li><a class="dropdown-item" href="{{ route('editor.dashboard') }}"><i class="fas fa-edit me-2"></i>Editor Panel</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('editor.dashboard') }}"><i class="fas fa-edit me-2"></i>Reviewer Panel</a></li>
                                 @else
                                     <li><a class="dropdown-item" href="{{ route('dashboard.index') }}"><i class="fas fa-user me-2"></i>My Dashboard</a></li>
                                 @endif
@@ -283,10 +304,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h5><i class="fas fa-book-open me-2"></i>SIJSEMSS</h5>
+                    <h5><i class="fas fa-book-open me-2"></i>SHARE IJ</h5>
                     <p class="small">Share International Journal of Sustainable Engineering, Management and Social Sciences is a multidisciplinary, peer-reviewed, open access journal published by Share Study Hub.</p>
                     <p class="small mb-1"><i class="fas fa-globe me-2"></i>Country: India</p>
-                    <p class="small mb-1"><i class="fas fa-calendar me-2"></i>Frequency: Monthly</p>
+                    <p class="small mb-1"><i class="fas fa-calendar me-2"></i>Frequency: Monthly e-Journal</p>
                     <p class="small mb-0"><i class="fas fa-lock-open me-2"></i>Open Access</p>
                 </div>
                 <div class="col-md-2 mb-4">
@@ -294,7 +315,7 @@
                     <ul class="list-unstyled small">
                         <li class="mb-1"><a href="{{ route('home') }}">Home</a></li>
                         <li class="mb-1"><a href="{{ route('about') }}">About Journal</a></li>
-                        <li class="mb-1"><a href="{{ route('editorial-board') }}">Editorial Board</a></li>
+                        <li class="mb-1"><a href="{{ route('editorial-board') }}">Editorial Team</a></li>
                         <li class="mb-1"><a href="{{ route('volumes.index') }}">Archives</a></li>
                         <li class="mb-1"><a href="{{ route('contact') }}">Contact</a></li>
                     </ul>
@@ -306,6 +327,8 @@
                         <li class="mb-1"><a href="{{ route('author-guidelines') }}">Author Guidelines</a></li>
                         <li class="mb-1"><a href="{{ route('submission-workflow') }}">Submission Workflow</a></li>
                         <li class="mb-1"><a href="{{ route('apc') }}">Publication Charges</a></li>
+                        <li class="mb-1"><a href="/downloads/copyright-form.pdf">Copyright Form</a></li>
+                        <li class="mb-1"><a href="/downloads/paper-format.docx">Paper Format</a></li>
                         <li class="mb-1"><a href="{{ route('register') }}">Submit Paper</a></li>
                     </ul>
                 </div>
@@ -314,7 +337,7 @@
                     <ul class="list-unstyled small">
                         <li class="mb-2"><i class="fas fa-envelope me-2"></i><a href="mailto:editor@shareij.org">editor@shareij.org</a></li>
                         <li class="mb-2"><i class="fas fa-building me-2"></i>Share Study Hub</li>
-                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>India</li>
+                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>121, Shripuram Colony, Gurjar Ki Thadi, Jaipur, India</li>
                     </ul>
                     <div class="d-flex gap-2">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
@@ -326,6 +349,7 @@
             </div>
             <div class="footer-bottom text-center">
                 <p class="mb-0">&copy; {{ date('Y') }} Share International Journal of Sustainable Engineering, Management and Social Sciences. Published by <strong>Share Study Hub</strong>. All rights reserved.</p>
+                <p class="mb-0 mt-1" style="font-size:0.78rem;opacity:0.7"><i class="fas fa-shield-alt me-1"></i> @yield('footer_copyright', 'Content licensed under Creative Commons Attribution 4.0 International License.')</p>
             </div>
         </div>
     </footer>

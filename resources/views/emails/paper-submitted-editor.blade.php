@@ -15,13 +15,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>SIJSEMSS</h1>
+            <h1>SHARE IJ</h1>
             <p>New Paper Submission</p>
         </div>
         <div class="content">
             <p>Dear Editor,</p>
             
-            <p>A new paper has been submitted to SIJSEMSS and requires your attention.</p>
+            <p>A new paper has been submitted to SHARE IJ and requires your attention.</p>
             
             <div class="paper-info">
                 <h3>{{ $paper->title }}</h3>
@@ -38,7 +38,7 @@
             </p>
         </div>
         <div class="footer">
-            <p> {{ date('Y') }} SIJSEMSS. All rights reserved.</p>
+            <p> {{ date('Y') }} SHARE IJ. All rights reserved.</p>
         </div>
     </div>
 </body>

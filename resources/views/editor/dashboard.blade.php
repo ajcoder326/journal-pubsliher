@@ -1,7 +1,7 @@
 @extends('layouts.editor')
-@section('title', 'Editor Dashboard')
+@section('title', 'Reviewer Dashboard')
 @section('content')
-<h2 class="mb-4">Editor Dashboard</h2>
+<h2 class="mb-4">Reviewer Dashboard</h2>
 
 <div class="row g-4 mb-4">
     <div class="col-md-4">
@@ -54,7 +54,6 @@
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Author</th>
                     <th>Submitted</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -64,13 +63,12 @@
                 @forelse($papers as $paper)
                 <tr>
                     <td>{{ Str::limit($paper->title, 40) }}</td>
-                    <td>{{ $paper->user->name ?? 'N/A' }}</td>
                     <td>{{ $paper->created_at->format('M d, Y') }}</td>
                     <td><span class="badge bg-{{ $paper->status == 'pending' ? 'warning' : ($paper->status == 'in_review' ? 'info' : 'secondary') }}">{{ ucfirst(str_replace('_', ' ', $paper->status)) }}</span></td>
                     <td><a href="{{ route('editor.papers.show', $paper) }}" class="btn btn-sm btn-outline-primary">Review</a></td>
                 </tr>
                 @empty
-                <tr><td colspan="5" class="text-center text-muted">No papers awaiting review</td></tr>
+                <tr><td colspan="4" class="text-center text-muted">No papers awaiting review</td></tr>
                 @endforelse
             </tbody>
         </table>

@@ -1,11 +1,11 @@
 ﻿@extends('layouts.app')
-@section('title', 'Editorial Board - SIJSEMSS')
+@section('title', 'Editorial Team - SHARE IJ')
 @section('content')
 <div class="page-header">
     <div class="container">
-        <h1>Editorial Board</h1>
+        <h1>Editorial Team</h1>
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb"><li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li><li class="breadcrumb-item active">Editorial Board</li></ol>
+            <ol class="breadcrumb"><li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li><li class="breadcrumb-item active">Editorial Team</li></ol>
         </nav>
     </div>
 </div>
@@ -30,8 +30,8 @@
         </div>
     </div>
 
-    <!-- Editorial Board Members -->
-    <h2 class="section-title">Editorial Board Members</h2>
+    <!-- Editorial Team Members -->
+    <h2 class="section-title">Editorial Team Members</h2>
     <div class="row g-4 mb-5">
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 text-center">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <h5 class="card-title mb-1">Prof (Dr). Pragya Tank</h5>
-                    <span class="badge bg-secondary mb-2">Editorial Board</span>
+                    <span class="badge bg-secondary mb-2">Editorial Team</span>
                     <p class="small text-muted mb-0">Ajmer, Rajasthan, India</p>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <h5 class="card-title mb-1">Prof (Dr). Hanuman Prasad</h5>
-                    <span class="badge bg-secondary mb-2">Editorial Board</span>
+                    <span class="badge bg-secondary mb-2">Editorial Team</span>
                     <p class="small text-muted mb-0">Mohan Lal Sukhadia University, Udaipur, Rajasthan, India</p>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <h5 class="card-title mb-1">Prof (Dr). Sanjay Bayani</h5>
-                    <span class="badge bg-secondary mb-2">Editorial Board</span>
+                    <span class="badge bg-secondary mb-2">Editorial Team</span>
                     <p class="small text-muted mb-0">Saurashtra University, Rajkot, Gujarat, India</p>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <h5 class="card-title mb-1">Prof (Dr). K A S Dhammika</h5>
-                    <span class="badge bg-secondary mb-2">Editorial Board</span>
+                    <span class="badge bg-secondary mb-2">Editorial Team</span>
                     <p class="small text-muted mb-0">University of Kelaniya, Sri Lanka</p>
                 </div>
             </div>
@@ -93,7 +93,7 @@
 
     <!-- Dynamic board from DB -->
     @if($editors->count() > 0)
-    <h2 class="section-title">Additional Board Members</h2>
+    <h2 class="section-title">Additional Team Members</h2>
     <div class="row g-4 mb-5">
         @foreach($editors as $editor)
             <div class="col-md-6 col-lg-4">

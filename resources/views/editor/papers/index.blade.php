@@ -13,8 +13,6 @@
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Author</th>
-                    <th>Volume</th>
                     <th>Status</th>
                     <th>Submitted</th>
                     <th>Actions</th>
@@ -24,8 +22,6 @@
                 @forelse($papers as $paper)
                 <tr>
                     <td>{{ Str::limit($paper->title, 35) }}</td>
-                    <td>{{ $paper->user->name ?? 'N/A' }}</td>
-                    <td>{{ $paper->volume->title ?? 'Unassigned' }}</td>
                     <td>
                         <span class="badge bg-{{ 
                             $paper->status == 'pending' ? 'warning' : 
@@ -41,7 +37,7 @@
                     </td>
                 </tr>
                 @empty
-                <tr><td colspan="6" class="text-center text-muted">No papers found</td></tr>
+                <tr><td colspan="4" class="text-center text-muted">No papers found</td></tr>
                 @endforelse
             </tbody>
         </table>

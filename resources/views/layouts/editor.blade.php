@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Editor Dashboard') - SIJSEMSS</title>
+    <title>@yield('title', 'Reviewer Panel') - SHARE IJ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -21,8 +21,8 @@
     <div class="row">
         <nav class="col-md-3 col-lg-2 d-md-block sidebar py-4">
             <div class="text-center mb-4">
-                <h5 class="text-white"><i class="fas fa-book-open me-2"></i> SIJSEMSS</h5>
-                <small class="text-white-50">Editor Panel</small>
+                <h5 class="text-white"><i class="fas fa-book-open me-2"></i> SHARE IJ</h5>
+                <small class="text-white-50">Reviewer Panel</small>
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">

@@ -25,7 +25,7 @@ class DynamicTemplateMail extends Mailable
 
     public function envelope(): Envelope
     {
-        $subject = $this->template ? $this->template->subject : 'DE-Journal Notification';
+        $subject = $this->template ? $this->template->subject : 'SHARE IJ Notification';
         
         foreach ($this->placeholders as $key => $value) {
             $subject = str_replace('{' . $key . '}', $value, $subject);

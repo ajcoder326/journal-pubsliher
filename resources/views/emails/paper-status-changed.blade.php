@@ -21,7 +21,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>SIJSEMSS</h1>
+            <h1>SHARE IJ</h1>
             <p>Paper Status Update</p>
         </div>
         <div class="content">
@@ -55,7 +55,7 @@
             </p>
         </div>
         <div class="footer">
-            <p> {{ date('Y') }} SIJSEMSS. All rights reserved.</p>
+            <p> {{ date('Y') }} SHARE IJ. All rights reserved.</p>
             <p>This is an automated message. Please do not reply directly to this email.</p>
         </div>
     </div>

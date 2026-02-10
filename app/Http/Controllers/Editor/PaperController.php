@@ -17,18 +17,19 @@ class PaperController extends Controller
 
     public function show(Paper $paper)
     {
-        $paper->load(['user', 'reviews.user', 'volume']);
-        $volumes = Volume::all();
-        return view('editor.papers.show', compact('paper', 'volumes'));
+        $paper->load(['reviews.user']);
+        return view('editor.papers.show', compact('paper'));
     }
 
     public function update(Request $request, Paper $paper)
     {
+        $allowedStatuses = ['pending', 'in_review', 'correction_needed', 'approved', 'rejected'];
+        $request->validate(['status' => 'required|in:' . implode(',', $allowedStatuses)]);
+
         $paper->update([
             'status' => $request->status,
-            'volume_id' => $request->volume_id,
         ]);
 
-        return redirect()->route('editor.papers.show', $paper)->with('success', 'Paper updated successfully.');
+        return redirect()->route('editor.papers.show', $paper)->with('success', 'Paper status updated successfully.');
     }
 }

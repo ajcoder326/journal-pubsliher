@@ -1,5 +1,5 @@
 ﻿@extends('layouts.app')
-@section('title', 'Call for Papers - SIJSEMSS')
+@section('title', 'Call for Papers - SHARE IJ')
 @section('content')
 <div class="page-header">
     <div class="container">
@@ -109,9 +109,9 @@
                     <h5><i class="fas fa-calendar-alt me-2"></i>Important Information</h5>
                     <ul class="list-unstyled small mb-0">
                         <li class="mb-2"><i class="fas fa-clock me-2"></i><strong>Submission:</strong> Rolling basis (always open)</li>
-                        <li class="mb-2"><i class="fas fa-search me-2"></i><strong>Review Period:</strong> 2&ndash;4 weeks</li>
+                        <li class="mb-2"><i class="fas fa-search me-2"></i><strong>Review Period:</strong> 2&ndash;3 days</li>
                         <li class="mb-2"><i class="fas fa-check-circle me-2"></i><strong>Publication:</strong> Upon acceptance</li>
-                        <li class="mb-2"><i class="fas fa-calendar me-2"></i><strong>Frequency:</strong> Monthly</li>
+                        <li class="mb-2"><i class="fas fa-calendar me-2"></i><strong>Frequency:</strong> Monthly e-Journal</li>
                         <li class="mb-0"><i class="fas fa-coins me-2"></i><strong>Indian APC:</strong> &#8377;999 | <strong>Foreign:</strong> $40</li>
                     </ul>
                 </div>

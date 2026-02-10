@@ -14,11 +14,11 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Journal Name</label>
-                            <input type="text" name="site_name" class="form-control" value="{{ $settings['site_name'] ?? 'SIJSEMSS' }}">
+                            <input type="text" name="site_name" class="form-control" value="{{ $settings['site_name'] ?? 'SHARE IJ' }}">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Journal Abbreviation</label>
-                            <input type="text" name="journal_abbreviation" class="form-control" value="{{ $settings['journal_abbreviation'] ?? 'SIJSEMSS' }}">
+                            <input type="text" name="journal_abbreviation" class="form-control" value="{{ $settings['journal_abbreviation'] ?? 'SHARE IJ' }}">
                         </div>
                     </div>
                     <div class="mb-3">
@@ -163,7 +163,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Meta Keywords</label>
-                        <input type="text" name="meta_keywords" class="form-control" value="{{ $settings['meta_keywords'] ?? '' }}" placeholder="journal, research, SIJSEMSS, open access">
+                        <input type="text" name="meta_keywords" class="form-control" value="{{ $settings['meta_keywords'] ?? '' }}" placeholder="journal, research, SHARE IJ, open access">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Google Analytics Tracking ID</label>

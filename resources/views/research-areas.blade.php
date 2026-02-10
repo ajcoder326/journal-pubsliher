@@ -1,5 +1,5 @@
 ﻿@extends('layouts.app')
-@section('title', 'Subject Areas - SIJSEMSS')
+@section('title', 'Subject Areas - SHARE IJ')
 @section('content')
 <div class="page-header">
     <div class="container">
@@ -11,7 +11,7 @@
 </div>
 
 <div class="container py-5">
-    <p class="lead mb-5">SIJSEMSS covers original research across the following broad disciplines with a focus on sustainability, innovation, and contemporary global issues.</p>
+    <p class="lead mb-5">SHARE IJ covers original research across the following broad disciplines with a focus on sustainability, innovation, and contemporary global issues.</p>
 
     <div class="row g-4">
         <!-- Engineering & Technology -->

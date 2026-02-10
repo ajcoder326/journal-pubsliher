@@ -15,13 +15,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>SIJSEMSS</h1>
+            <h1>SHARE IJ</h1>
             <p>Review Request</p>
         </div>
         <div class="content">
             <p>Dear {{ $reviewer->name }},</p>
             
-            <p>You have been assigned to review a paper submitted to SIJSEMSS.</p>
+            <p>You have been assigned to review a paper submitted to SHARE IJ.</p>
             
             <div class="paper-info">
                 <h3>{{ $paper->title }}</h3>
@@ -41,7 +41,7 @@
             </p>
         </div>
         <div class="footer">
-            <p> {{ date('Y') }} SIJSEMSS. All rights reserved.</p>
+            <p> {{ date('Y') }} SHARE IJ. All rights reserved.</p>
         </div>
     </div>
 </body>

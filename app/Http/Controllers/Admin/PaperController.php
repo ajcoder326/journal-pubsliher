@@ -22,8 +22,8 @@ class PaperController extends Controller
 
     public function show(Paper $paper)
     {
-        $paper->load(['user', 'volume', 'reviews.user']);
-        $reviewers = User::where('role', 'reviewer')->get();
+        $paper->load(['user', 'volume', 'reviews.user', 'assignedReviewers.user']);
+        $reviewers = User::whereIn('role', ['reviewer', 'editor', 'editor_in_chief'])->get();
         return view('admin.papers.show', compact('paper', 'reviewers'));
     }
 

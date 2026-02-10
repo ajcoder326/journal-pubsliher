@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Article Processing Charges - SIJSEMSS')
+@section('title', 'Article Processing Charges - SHARE IJ')
 @section('content')
 <div class="page-header">
     <div class="container">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Submission & Review Workflow - SIJSEMSS')
+@section('title', 'Submission & Review Workflow - SHARE IJ')
 @section('content')
 <div class="page-header">
     <div class="container">
@@ -101,11 +101,11 @@
             <div class="sidebar mb-4">
                 <h5><i class="fas fa-clock me-2"></i>Timeline</h5>
                 <table class="table table-sm table-borderless small mb-0">
-                    <tr><td class="fw-semibold">Initial Screening</td><td>1&ndash;3 days</td></tr>
-                    <tr><td class="fw-semibold">Peer Review</td><td>2&ndash;4 weeks</td></tr>
-                    <tr><td class="fw-semibold">Revision Period</td><td>1&ndash;2 weeks</td></tr>
-                    <tr><td class="fw-semibold">Final Decision</td><td>3&ndash;5 days</td></tr>
-                    <tr><td class="fw-semibold">Publication</td><td>Within 7 days of acceptance</td></tr>
+                    <tr><td class="fw-semibold">Initial Screening</td><td>1&ndash;2 days</td></tr>
+                    <tr><td class="fw-semibold">Peer Review</td><td>2&ndash;3 days</td></tr>
+                    <tr><td class="fw-semibold">Revision Period</td><td>2&ndash;3 days</td></tr>
+                    <tr><td class="fw-semibold">Final Decision</td><td>1&ndash;2 days</td></tr>
+                    <tr><td class="fw-semibold">Publication</td><td>Within 2&ndash;3 days of acceptance</td></tr>
                 </table>
             </div>
 

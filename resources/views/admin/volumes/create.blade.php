@@ -15,7 +15,7 @@
                 <div class="col-md-8">
                     <div class="mb-3">
                         <label class="form-label">Volume Title <span class="text-danger">*</span></label>
-                        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="e.g., SIJSEMSS Volume 1, Issue 1" required>
+                        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="e.g., SHARE IJ Volume 1, Issue 1" required>
                         @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">

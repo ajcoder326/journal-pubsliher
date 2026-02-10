@@ -114,10 +114,9 @@ class NotificationService
         self::send('reviewer_assigned', $reviewer->email, [
             'reviewer_name' => $reviewer->name,
             'paper_title' => $paper->title,
-            'authors' => $paper->authors,
             'keywords' => $paper->keywords ?? 'Not specified',
             'abstract' => $paper->abstract,
-            'review_url' => url('/editor/papers/' . $paper->id . '/review'),
+            'review_url' => url('/editor/papers/' . $paper->id),
         ]);
     }
 

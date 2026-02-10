@@ -1,5 +1,5 @@
 ﻿@extends('layouts.app')
-@section('title', 'Volumes - SIJSEMSS')
+@section('title', 'Volumes - SHARE IJ')
 @section('content')
 <div class="container py-5">
     <h1 class="section-title">Journal Archive</h1>

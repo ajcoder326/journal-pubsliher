@@ -65,7 +65,7 @@
 
     <div class="email-container">
         <div class="email-header">
-            <h1>SIJSEMSS</h1>
+            <h1>SHARE IJ</h1>
         </div>
         <div class="email-subject">
             <strong>Subject:</strong> {{ $subject }}

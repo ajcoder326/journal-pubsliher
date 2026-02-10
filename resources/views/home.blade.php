@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'SIJSEMSS - Share International Journal of Sustainable Engineering, Management and Social Sciences')
+@section('title', 'SHARE IJ - Share International Journal of Sustainable Engineering, Management and Social Sciences')
 
 @section('content')
 <!-- Hero Section -->
@@ -8,9 +8,9 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-7">
-                <span class="badge bg-warning text-dark mb-3 px-3 py-2" style="font-size:0.85rem;">International | Open Access | Peer-Reviewed | Monthly</span>
+                <span class="badge bg-warning text-dark mb-3 px-3 py-2" style="font-size:0.85rem;">International | Open Access | Peer-Reviewed | Monthly e-Journal</span>
                 <h1 class="display-5 fw-bold mb-3">Share International Journal of Sustainable Engineering, Management &amp; Social Sciences</h1>
-                <p class="lead mb-2">A multidisciplinary, scholarly journal published by <strong>Share Study Hub</strong> (Est. 2010)</p>
+                <p class="lead mb-2">A multidisciplinary, scholarly journal published by <strong>Share Study Hub</strong></p>
                 <p class="mb-4" style="opacity:0.85;">"Knowledge Shared is Knowledge Squared" &mdash; Providing a global platform for researchers, academicians, and practitioners to disseminate original research and interdisciplinary perspectives.</p>
                 <div class="d-flex flex-wrap gap-2">
                     <a href="{{ route('register') }}" class="btn btn-accent btn-lg"><i class="fas fa-paper-plane me-2"></i>Submit Manuscript</a>
@@ -25,11 +25,11 @@
                             <h5 class="mb-3"><i class="fas fa-info-circle me-2"></i>Journal Details</h5>
                             <ul class="list-unstyled small mb-0">
                                 <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>ISSN: Applied</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Double-Blind Peer Review</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Blind Peer Review</li>
                                 <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>DOI for Every Article</li>
                                 <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Open Access Publication</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Monthly Publication</li>
-                                <li class="mb-0"><i class="fas fa-check-circle text-warning me-2"></i>UGC CARE Compliant</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Monthly e-Journal Publication</li>
+                                <li class="mb-0"><i class="fas fa-check-circle text-warning me-2"></i>Previous UGC Approved</li>
                             </ul>
                         </div>
                     </div>
@@ -75,8 +75,8 @@
             <div class="col-md-4 col-lg-3">
                 <div class="card h-100 feature-card">
                     <div class="icon-wrap"><i class="fas fa-shield-alt"></i></div>
-                    <h6>UGC CARE Compliant</h6>
-                    <p class="small text-muted mb-0">Fully aligned with UGC CARE guidelines for academic recognition.</p>
+                    <h6>Previous UGC Approved</h6>
+                    <p class="small text-muted mb-0">Previously approved under UGC guidelines for academic recognition.</p>
                 </div>
             </div>
             <div class="col-md-4 col-lg-3">
@@ -201,34 +201,48 @@
     </div>
 </section>
 
-<!-- Latest News -->
-@if($latestPosts->count() > 0)
+<!-- Join Us Section -->
 <section class="py-5">
     <div class="container">
-        <h2 class="section-title">Latest News &amp; Announcements</h2>
+        <h2 class="section-title text-center">Join Our Team</h2>
         <div class="row g-4">
-            @foreach($latestPosts as $post)
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5>{{ $post->title }}</h5>
-                            <p class="small text-muted">{{ $post->created_at->format('M d, Y') }}</p>
-                            <p>{{ Str::limit(strip_tags($post->content), 120) }}</p>
-                            <a href="{{ route('blog.show', $post) }}" class="small fw-semibold">Read more <i class="fas fa-arrow-right ms-1"></i></a>
-                        </div>
+            <div class="col-md-6">
+                <div class="card h-100" style="border-left: 4px solid var(--secondary);">
+                    <div class="card-body">
+                        <h4><i class="fas fa-clipboard-check me-2 text-primary"></i>Join as a Reviewer</h4>
+                        <p>Experienced academicians, researchers, and professionals are invited to join the reviewer panel of SHARE IJ.</p>
+                        <ul class="small">
+                            <li>Doctoral degree or equivalent experience</li>
+                            <li>Active involvement in research or teaching</li>
+                            <li>At least two publications in peer-reviewed journals</li>
+                        </ul>
+                        <p class="small mb-0"><strong>Apply:</strong> Send CV to <a href="mailto:editor@shareij.org">editor@shareij.org</a></p>
                     </div>
                 </div>
-            @endforeach
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100" style="border-left: 4px solid var(--accent);">
+                    <div class="card-body">
+                        <h4><i class="fas fa-users-cog me-2 text-primary"></i>Join as Associate Editor</h4>
+                        <p>Qualified academicians are invited to join as Associate Editor, Assistant Editor, Co-Editor, or other editorial positions.</p>
+                        <ul class="small">
+                            <li>Ph.D. or equivalent qualification in a relevant discipline</li>
+                            <li>Strong research and publication record</li>
+                            <li>Prior experience in peer review or editorial roles (preferred)</li>
+                        </ul>
+                        <p class="small mb-0"><strong>Apply:</strong> Send CV to <a href="mailto:editor@shareij.org">editor@shareij.org</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
-@endif
 
 <!-- CTA Section -->
 <section class="py-5" style="background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);">
     <div class="container text-center text-white">
         <h2 class="mb-3">Ready to Submit Your Research?</h2>
-        <p class="mb-4 opacity-75">Join researchers from around the world publishing in SIJSEMSS.</p>
+        <p class="mb-4 opacity-75">Join researchers from around the world publishing in SHARE IJ.</p>
         <a href="{{ route('register') }}" class="btn btn-accent btn-lg"><i class="fas fa-paper-plane me-2"></i>Submit Your Manuscript</a>
     </div>
 </section>

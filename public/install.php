@@ -1,6 +1,6 @@
 <?php
 /**
- * SIJSEMSS - Web Installer for cPanel / Shared Hosting
+ * SHARE IJ - Web Installer for cPanel / Shared Hosting
  * 
  * Upload entire project to your hosting, then visit:
  *   https://yourdomain.com/install.php
@@ -43,7 +43,7 @@ if (file_exists($lockFile)) {
     .box{background:#fff;border-radius:12px;padding:40px;box-shadow:0 4px 24px rgba(0,0,0,.08);text-align:center;max-width:500px}
     h2{color:#1e293b}p{color:#64748b}a{color:#2563eb}</style></head>
     <body><div class="box"><h2>&#10004; Already Installed</h2>
-    <p>SIJSEMSS is already installed. For security, the installer has been disabled.</p>
+    <p>SHARE IJ is already installed. For security, the installer has been disabled.</p>
     <p><a href="/">Go to Homepage</a> &bull; <a href="/admin">Admin Panel</a></p>
     </div></body></html>');
 }
@@ -275,7 +275,7 @@ function runInstallation(array $data): array {
                 $steps[] = ['step' => 'Admin Account', 'status' => 'success', 'message' => "Admin created: {$adminEmail}"];
                 
                 // Create essential settings
-                \App\Models\Setting::updateOrCreate(['key' => 'site_name'], ['value' => 'SIJSEMSS']);
+                \App\Models\Setting::updateOrCreate(['key' => 'site_name'], ['value' => 'SHARE IJ']);
                 \App\Models\Setting::updateOrCreate(['key' => 'site_email'], ['value' => $adminEmail]);
                 $steps[] = ['step' => 'Default Settings', 'status' => 'success', 'message' => 'Site settings initialized'];
             }
@@ -381,7 +381,7 @@ function generateEnvFile(array $data): string {
     $mailUser    = trim($data['mail_user'] ?? '');
     $mailPass    = $data['mail_pass'] ?? '';
     $mailFrom    = trim($data['mail_from'] ?? $dbUser);
-    $mailName    = trim($data['mail_from_name'] ?? 'SIJSEMSS');
+    $mailName    = trim($data['mail_from_name'] ?? 'SHARE IJ');
     $mailScheme  = trim($data['mail_encryption'] ?? 'tls');
     
     // On cPanel shared hosting, sendmail is often the easiest
@@ -396,7 +396,7 @@ function generateEnvFile(array $data): string {
     $sessionDriver = 'file'; // file is most reliable on shared hosting
 
     return <<<ENV
-APP_NAME=SIJSEMSS
+APP_NAME="SHARE IJ"
 APP_ENV=production
 APP_KEY=
 APP_DEBUG=false
@@ -451,7 +451,7 @@ ENV;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIJSEMSS - Installer</title>
+    <title>SHARE IJ - Installer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <style>
@@ -520,7 +520,7 @@ ENV;
     <div class="installer-container">
         <div class="installer-card">
             <div class="installer-header">
-                <h1><i class="fas fa-journal-whills"></i> SIJSEMSS Installer</h1>
+                <h1><i class="fas fa-journal-whills"></i> SHARE IJ Installer</h1>
                 <p>Share International Journal of Sustainable Engineering, Management & Social Sciences</p>
             </div>
             <div class="installer-body">
@@ -572,7 +572,7 @@ ENV;
                         </div>
                         <div class="col-md-12">
                             <label class="form-label">Database Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="db_name" placeholder="cpaneluser_sijsemss" required>
+                            <input type="text" class="form-control" id="db_name" placeholder="cpaneluser_shareij" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Database Username <span class="text-danger">*</span></label>
@@ -651,7 +651,7 @@ ENV;
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">From Name</label>
-                            <input type="text" class="form-control" id="mail_from_name" value="SIJSEMSS">
+                            <input type="text" class="form-control" id="mail_from_name" value="SHARE IJ">
                         </div>
                     </div>
                     <div class="d-flex justify-content-between mt-4">
@@ -723,7 +723,7 @@ ENV;
                     <div id="install-progress">
                         <div class="text-center py-4">
                             <div class="spinner" style="border-color:#2563eb rgba(37,99,235,.2) rgba(37,99,235,.2);border-top-color:#2563eb;width:48px;height:48px"></div>
-                            <h5 class="mt-3">Installing SIJSEMSS...</h5>
+                            <h5 class="mt-3">Installing SHARE IJ...</h5>
                             <p class="text-muted">This may take a minute. Please don't close this page.</p>
                         </div>
                     </div>
@@ -747,7 +747,7 @@ ENV;
                 
             </div>
         </div>
-        <p class="text-center mt-3" style="color:rgba(255,255,255,.4);font-size:.8rem">SIJSEMSS Installer v1.0 &bull; Laravel 12</p>
+        <p class="text-center mt-3" style="color:rgba(255,255,255,.4);font-size:.8rem">SHARE IJ Installer v1.0 &bull; Laravel 12</p>
     </div>
 
     <script>
@@ -952,7 +952,7 @@ ENV;
             if (data.success) {
                 header.innerHTML = '<div style="font-size:3rem;color:var(--success)"><i class="fas fa-check-circle"></i></div>' +
                     '<h4 class="mt-2">Installation Complete!</h4>' +
-                    '<p class="text-muted">SIJSEMSS has been installed successfully.</p>';
+                    '<p class="text-muted">SHARE IJ has been installed successfully.</p>';
             } else {
                 header.innerHTML = '<div style="font-size:3rem;color:var(--danger)"><i class="fas fa-times-circle"></i></div>' +
                     '<h4 class="mt-2">Installation Failed</h4>' +

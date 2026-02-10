@@ -14,7 +14,6 @@
             <div class="card-header"><strong>Paper Details</strong></div>
             <div class="card-body">
                 <h4>{{ $paper->title }}</h4>
-                <p class="text-muted"><strong>Authors:</strong> {{ $paper->authors }}</p>
                 <p class="text-muted"><strong>Keywords:</strong> {{ $paper->keywords ?? 'N/A' }}</p>
                 <hr>
                 <h6>Abstract</h6>
@@ -58,7 +57,6 @@
                     </span>
                 </p>
                 <p><strong>Submitted:</strong> {{ $paper->created_at->format('M d, Y') }}</p>
-                <p><strong>Author:</strong> {{ $paper->user->name ?? 'N/A' }}</p>
             </div>
         </div>
 
@@ -73,18 +71,8 @@
                             <option value="pending" {{ $paper->status == 'pending' ? 'selected' : '' }}>Pending</option>
                             <option value="in_review" {{ $paper->status == 'in_review' ? 'selected' : '' }}>In Review</option>
                             <option value="correction_needed" {{ $paper->status == 'correction_needed' ? 'selected' : '' }}>Correction Needed</option>
-                            <option value="approved" {{ $paper->status == 'approved' ? 'selected' : '' }}>Approved</option>
-                            <option value="rejected" {{ $paper->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
-                            <option value="published" {{ $paper->status == 'published' ? 'selected' : '' }}>Published</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Assign to Volume</label>
-                        <select name="volume_id" class="form-select">
-                            <option value="">-- Select Volume --</option>
-                            @foreach($volumes as $volume)
-                            <option value="{{ $volume->id }}" {{ $paper->volume_id == $volume->id ? 'selected' : '' }}>{{ $volume->title }}</option>
-                            @endforeach
+                            <option value="approved" {{ $paper->status == 'approved' ? 'selected' : '' }}>Review Done - Approved</option>
+                            <option value="rejected" {{ $paper->status == 'rejected' ? 'selected' : '' }}>Review Done - Rejected</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Update Paper</button>

@@ -54,6 +54,39 @@
                 </div>
             </div>
 
+            <!-- Downloads & Quick Actions -->
+            <div class="card mb-4">
+                <div class="card-header"><h5 class="mb-0"><i class="fas fa-download me-2"></i>Downloads & Quick Actions</h5></div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <a href="/downloads/copyright-form.pdf" class="btn btn-outline-primary w-100" target="_blank">
+                                <i class="fas fa-file-contract d-block mb-1" style="font-size:1.5rem;"></i>
+                                Copyright Form
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/downloads/paper-format.docx" class="btn btn-outline-primary w-100" target="_blank">
+                                <i class="fas fa-file-word d-block mb-1" style="font-size:1.5rem;"></i>
+                                Paper Format
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#" class="btn btn-outline-success w-100" onclick="alert('Publication certificates are available after your paper is published. Contact editor@shareij.org for assistance.'); return false;">
+                                <i class="fas fa-certificate d-block mb-1" style="font-size:1.5rem;"></i>
+                                Publication Certificate
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{{ route('apc') }}" class="btn btn-outline-warning w-100">
+                                <i class="fas fa-credit-card d-block mb-1" style="font-size:1.5rem;"></i>
+                                Payment Options
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Recent Submissions</h5>

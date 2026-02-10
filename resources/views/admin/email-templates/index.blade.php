@@ -129,7 +129,7 @@ MAIL_USERNAME=your-email@gmail.com
 MAIL_PASSWORD=your-app-password
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=noreply@dejournal.com
-MAIL_FROM_NAME="SIJSEMSS"</code></pre>
+MAIL_FROM_NAME="SHARE IJ"</code></pre>
                     </div>
                 </div>
             </div>

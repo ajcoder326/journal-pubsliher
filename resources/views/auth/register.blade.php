@@ -1,6 +1,6 @@
 ﻿@extends('layouts.app')
 
-@section('title', 'Register - SIJSEMSS')
+@section('title', 'Register - SHARE IJ')
 
 @section('content')
 <div class="container py-5">
@@ -36,6 +36,15 @@
                             <input type="text" class="form-control @error('affiliation') is-invalid @enderror" 
                                    id="affiliation" name="affiliation" value="{{ old('affiliation') }}">
                             @error('affiliation')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" 
+                                   id="phone" name="phone" value="{{ old('phone') }}" required placeholder="e.g., +91 9876543210">
+                            @error('phone')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIJSEMSS</title>
+    <title>SHARE IJ</title>
 </head>
 <body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5;">
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f5f5f5; padding: 20px 0;">
@@ -13,7 +13,7 @@
                     <!-- Header -->
                     <tr>
                         <td style="background-color: #0d6efd; padding: 30px; text-align: center;">
-                            <h1 style="color: #ffffff; margin: 0; font-size: 28px;">SIJSEMSS</h1>
+                            <h1 style="color: #ffffff; margin: 0; font-size: 28px;">SHARE IJ</h1>
                         </td>
                     </tr>
                     <!-- Content -->
@@ -26,7 +26,7 @@
                     <tr>
                         <td style="background-color: #f8f9fa; padding: 20px; text-align: center; border-top: 1px solid #e9ecef;">
                             <p style="margin: 0 0 10px 0; color: #6c757d; font-size: 14px;">
-                                &copy; {{ date('Y') }} SIJSEMSS. All rights reserved.
+                                &copy; {{ date('Y') }} SHARE IJ. All rights reserved.
                             </p>
                             <p style="margin: 0; color: #6c757d; font-size: 12px;">
                                 This is an automated message. Please do not reply directly to this email.

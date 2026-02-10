@@ -28,9 +28,9 @@ class PostSeeder extends Seeder
 
         $posts = [
             [
-                'title' => 'Welcome to DE-Journal',
-                'slug' => 'welcome-to-de-journal',
-                'content' => '<p>Welcome to DE-Journal, your premier destination for academic research and publications. We are committed to advancing knowledge and fostering academic excellence through peer-reviewed publications.</p>
+                'title' => 'Welcome to SHARE IJ',
+                'slug' => 'welcome-to-share-ij',
+                'content' => '<p>Welcome to SHARE IJ, your premier destination for academic research and publications. We are committed to advancing knowledge and fostering academic excellence through peer-reviewed publications.</p>
                 <p>Our journal covers a wide range of disciplines and welcomes submissions from researchers worldwide. We strive to maintain the highest standards of academic integrity and scientific rigor.</p>
                 <h3>Our Mission</h3>
                 <p>To provide a platform for researchers to share their findings with the global academic community, fostering collaboration and innovation across disciplines.</p>',
@@ -62,7 +62,7 @@ class PostSeeder extends Seeder
                 <ul>
                     <li>Extended review timeline of 4 weeks</li>
                     <li>Structured feedback forms</li>
-                    <li>Double-blind review process</li>
+                    <li>Blind review process</li>
                 </ul>',
                 'status' => 'published',
                 'published_at' => now()->subDays(7),

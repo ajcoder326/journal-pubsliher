@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $post->title . ' - SIJSEMSS')
+@section('title', $post->title . ' - SHARE IJ')
 
 @section('content')
 <div class="container py-5">

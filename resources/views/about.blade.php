@@ -1,6 +1,6 @@
 ﻿@extends('layouts.app')
 
-@section('title', 'About - SIJSEMSS')
+@section('title', 'About - SHARE IJ')
 
 @section('content')
 <div class="page-header">
@@ -15,7 +15,7 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-lg-8">
-            <p class="lead">Share International Journal of Sustainable Engineering, Management and Social Sciences (SIJSEMSS) is a multidisciplinary, international, open access, scholarly, and peer-reviewed journal published by <strong>Share Study Hub</strong>, an academic publishing and research facilitation organization established in 2010 as S.H.A.R.E. &ndash; "A Study Hub for Analysis, Research &amp; Evaluation."</p>
+            <p class="lead">Share International Journal of Sustainable Engineering, Management and Social Sciences (SHARE IJ) is a multidisciplinary, international, open access, scholarly, and peer-reviewed journal published by <strong>Share Study Hub</strong>, an academic publishing and research facilitation organization established as S.H.A.R.E. &ndash; "A Study Hub for Analysis, Research &amp; Evaluation."</p>
 
             <p>Guided by the core objective that <em>"Knowledge Shared is Knowledge Squared,"</em> the journal provides a global platform for researchers, academicians, and practitioners to disseminate original research, critical insights, and interdisciplinary perspectives that contribute to sustainable development, innovation, and societal progress.</p>
 
@@ -28,7 +28,7 @@
                 </ul>
             </div>
 
-            <p>Building on this academic legacy, SIJSEMSS is launched to address the growing need for rigorous, multidisciplinary, and sustainability-focused research. The journal aims to promote high-quality scholarly contributions that integrate engineering innovation, management practices, and social science perspectives, while adhering strictly to ethical publishing standards, peer-review integrity, open access principles, and UGC-aligned scholarly norms.</p>
+            <p>Building on this academic legacy, SHARE IJ is launched to address the growing need for rigorous, multidisciplinary, and sustainability-focused research. The journal aims to promote high-quality scholarly contributions that integrate engineering innovation, management practices, and social science perspectives, while adhering strictly to ethical publishing standards, peer-review integrity, open access principles, and UGC-aligned scholarly norms.</p>
 
             <h3 class="mt-5">Vision</h3>
             <p>Our vision is to be an internationally recognized multidisciplinary journal that promotes rigorous, ethical, and impactful research in sustainable engineering, management, and social sciences, contributing meaningfully to global knowledge creation and sustainable development.</p>
@@ -44,7 +44,7 @@
             <p>The journal is committed to maintaining the highest standards of publication ethics and adheres to ethical guidelines consistent with UGC norms, ISSN requirements, and internationally accepted scholarly publishing practices. Authors must ensure that submitted manuscripts are original, properly cited, and free from plagiarism, data fabrication, or falsification. The journal uses plagiarism detection tools to verify originality.</p>
 
             <h3 class="mt-4">Open Access Policy</h3>
-            <p>SIJSEMSS is an open access journal, providing immediate and unrestricted access to published content. This model supports the free exchange of knowledge, enhances research visibility, and promotes wider academic and societal impact without financial or institutional barriers.</p>
+            <p>SHARE IJ is an open access journal, providing immediate and unrestricted access to published content. This model supports the free exchange of knowledge, enhances research visibility, and promotes wider academic and societal impact without financial or institutional barriers.</p>
 
             <h3 class="mt-4">Peer Review Policy</h3>
             <p>The journal follows a <strong>blind peer review</strong> process to ensure impartiality, academic rigor, and transparency in the evaluation of manuscripts. Each submission is reviewed by subject experts based on originality, relevance, research design, ethical compliance, and contribution to existing literature.</p>
@@ -58,12 +58,12 @@
                 <h5><i class="fas fa-list-check me-2"></i>Journal at a Glance</h5>
                 <table class="table table-sm table-borderless mb-0">
                     <tr><td class="fw-semibold">Publisher</td><td>Share Study Hub</td></tr>
-                    <tr><td class="fw-semibold">Established</td><td>2010</td></tr>
-                    <tr><td class="fw-semibold">Frequency</td><td>Monthly</td></tr>
+                    <tr><td class="fw-semibold">Established</td><td>Share Study Hub</td></tr>
+                    <tr><td class="fw-semibold">Frequency</td><td>Monthly e-Journal</td></tr>
                     <tr><td class="fw-semibold">Language</td><td>English & Hindi</td></tr>
                     <tr><td class="fw-semibold">ISSN</td><td>Applied</td></tr>
                     <tr><td class="fw-semibold">Access</td><td>Open Access</td></tr>
-                    <tr><td class="fw-semibold">Peer Review</td><td>Double-Blind</td></tr>
+                    <tr><td class="fw-semibold">Peer Review</td><td>Blind</td></tr>
                     <tr><td class="fw-semibold">Country</td><td>India</td></tr>
                     <tr><td class="fw-semibold">Mode</td><td>Online</td></tr>
                 </table>
@@ -83,7 +83,7 @@
             <div class="sidebar mb-4">
                 <h5><i class="fas fa-star me-2"></i>Why Publish Here?</h5>
                 <ul class="list-unstyled small mb-0">
-                    <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>UGC CARE compliant</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Previous UGC Approved</li>
                     <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>DOI for all articles</li>
                     <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Rapid peer review</li>
                     <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Instant certification</li>

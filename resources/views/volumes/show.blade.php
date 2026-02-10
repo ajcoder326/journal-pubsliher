@@ -1,5 +1,5 @@
 ﻿@extends('layouts.app')
-@section('title', $volume->title . ' - SIJSEMSS')
+@section('title', $volume->title . ' - SHARE IJ')
 @section('content')
 <div class="container py-5">
     <nav aria-label="breadcrumb">
