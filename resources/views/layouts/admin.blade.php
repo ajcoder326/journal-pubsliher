@@ -121,6 +121,24 @@
                         </a>
                     </li>
                     
+                    <div class="sidebar-heading">Website CMS</div>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('admin/pages*') ? 'active' : '' }}" href="{{ route('admin.pages.index') }}">
+                            <i class="fas fa-file-alt"></i> Pages
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('admin/menus*') ? 'active' : '' }}" href="{{ route('admin.menus.index') }}">
+                            <i class="fas fa-bars"></i> Menus
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('admin/appearance*') ? 'active' : '' }}" href="{{ route('admin.appearance.index') }}">
+                            <i class="fas fa-palette"></i> Appearance
+                        </a>
+                    </li>
+                    
                     <div class="sidebar-divider"></div>
                     
                     <li class="nav-item">
@@ -160,6 +178,7 @@
             </main>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     @yield('scripts')
 </body>

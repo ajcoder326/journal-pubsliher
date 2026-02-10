@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AppearanceController as AdminAppearance;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\EmailTemplateController as AdminEmailTemplate;
+use App\Http\Controllers\Admin\MenuController as AdminMenu;
 use App\Http\Controllers\Admin\MessageController as AdminMessage;
+use App\Http\Controllers\Admin\PageController as AdminPage;
 use App\Http\Controllers\Admin\PaperController as AdminPaper;
 use App\Http\Controllers\Admin\PostController as AdminPost;
 use App\Http\Controllers\Admin\ReviewController as AdminReview;
@@ -44,6 +47,12 @@ Route::get('/blog/{post:slug}', [PostController::class, 'show'])->name('blog.sho
 // Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Dynamic CMS Pages (catch-all for custom pages - must be after all named routes)
+Route::get('/page/{page:slug}', function (\App\Models\Page $page) {
+    if (!$page->is_published) abort(404);
+    return view('pages.show', compact('page'));
+})->name('page.show');
 
 // Auth Routes
 Route::middleware('guest')->group(function () {
@@ -99,4 +108,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('email-templates/{emailTemplate}/preview', [AdminEmailTemplate::class, 'preview'])->name('email-templates.preview');
     Route::patch('email-templates/{emailTemplate}/toggle', [AdminEmailTemplate::class, 'toggleStatus'])->name('email-templates.toggle');
     Route::post('email-templates/{emailTemplate}/test', [AdminEmailTemplate::class, 'testEmail'])->name('email-templates.test');
+    
+    // CMS - Pages
+    Route::resource('pages', AdminPage::class);
+    
+    // CMS - Menus
+    Route::resource('menus', AdminMenu::class);
+    Route::post('menus/reorder', [AdminMenu::class, 'reorder'])->name('menus.reorder');
+    
+    // CMS - Appearance  
+    Route::get('appearance', [AdminAppearance::class, 'index'])->name('appearance.index');
+    Route::post('appearance', [AdminAppearance::class, 'update'])->name('appearance.update');
 });

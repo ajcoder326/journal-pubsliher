@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'SHARE IJ - Share International Journal')</title>
-    <meta name="description" content="Share International Journal of Sustainable Engineering, Management and Social Sciences - A multidisciplinary, peer-reviewed, open access scholarly journal.">
+    <title>@yield('title', ($siteSettings['site_name'] ?? 'SHARE IJ') . ' - ' . ($siteSettings['journal_full_title'] ?? 'Share International Journal'))</title>
+    <meta name="description" content="@yield('meta_description', $siteSettings['meta_description'] ?? 'Share International Journal of Sustainable Engineering, Management and Social Sciences - A multidisciplinary, peer-reviewed, open access scholarly journal.')">
+    @if(!empty($siteSettings['meta_keywords']))
+    <meta name="keywords" content="{{ $siteSettings['meta_keywords'] }}">
+    @endif
+    @if(!empty($siteSettings['site_favicon']))
+    <link rel="icon" href="{{ asset('storage/' . $siteSettings['site_favicon']) }}">
+    @endif
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,13 +23,13 @@
 
     <style>
         :root {
-            --primary: #0d2b4e;
-            --primary-light: #164677;
-            --secondary: #d4a437;
-            --accent: #1a73e8;
+            --primary: {{ $siteSettings['theme_primary_color'] ?? '#0d2b4e' }};
+            --primary-light: {{ isset($siteSettings['theme_primary_color']) ? $siteSettings['theme_primary_color'] . 'cc' : '#164677' }};
+            --secondary: {{ $siteSettings['theme_secondary_color'] ?? '#d4a437' }};
+            --accent: {{ $siteSettings['theme_accent_color'] ?? '#1a73e8' }};
             --success: #0f9d58;
             --bg-light: #f7f9fc;
-            --text-dark: #1a1a2e;
+            --text-dark: {{ $siteSettings['theme_text_color'] ?? '#1a1a2e' }};
             --text-muted: #6c757d;
             --border-color: #e8ecf1;
             --radius: 12px;
@@ -199,6 +205,12 @@
         /* APC Table */
         .apc-table th { background: var(--primary); color: #fff; }
     </style>
+    @if(!empty($siteSettings['custom_css']))
+    <style>{{ $siteSettings['custom_css'] }}</style>
+    @endif
+    @if(!empty($siteSettings['custom_head_code']))
+    {!! $siteSettings['custom_head_code'] !!}
+    @endif
     @stack('styles')
 </head>
 <body>
@@ -206,11 +218,15 @@
     <div class="top-bar d-none d-md-block">
         <div class="container d-flex justify-content-between align-items-center">
             <div>
-                <i class="fas fa-envelope me-1"></i> <a href="mailto:editor@shareij.org">editor@shareij.org</a>
+                <i class="fas fa-envelope me-1"></i> <a href="mailto:{{ $siteSettings['contact_email'] ?? 'editor@shareij.org' }}">{{ $siteSettings['contact_email'] ?? 'editor@shareij.org' }}</a>
                 <span class="mx-2">|</span>
-                <span>ISSN: Applied</span>
+                <span>{{ $siteSettings['header_issn'] ?? 'ISSN: Applied' }}</span>
                 <span class="mx-2">|</span>
-                <span>Frequency: Monthly e-Journal</span>
+                <span>{{ $siteSettings['header_frequency'] ?? 'Frequency: Monthly e-Journal' }}</span>
+                @if(!empty($siteSettings['header_top_bar_text']))
+                    <span class="mx-2">|</span>
+                    <span>{{ $siteSettings['header_top_bar_text'] }}</span>
+                @endif
             </div>
             <div>
                 <a href="{{ route('author-guidelines') }}" class="me-3">Author Guidelines</a>
@@ -223,33 +239,61 @@
     <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <i class="fas fa-book-open me-2 text-primary"></i>SHARE IJ
-                <small>Share International Journal of Sustainable Engineering, Management &amp; Social Sciences</small>
+                @if(!empty($siteSettings['site_logo']))
+                    <img src="{{ asset('storage/' . $siteSettings['site_logo']) }}" alt="{{ $siteSettings['header_brand_name'] ?? 'SHARE IJ' }}" style="max-height: 50px;" class="me-2">
+                @else
+                    <i class="fas fa-book-open me-2 text-primary"></i>
+                @endif
+                {{ $siteSettings['header_brand_name'] ?? ($siteSettings['site_name'] ?? 'SHARE IJ') }}
+                <small>{{ $siteSettings['header_brand_subtitle'] ?? ($siteSettings['journal_full_title'] ?? 'Share International Journal of Sustainable Engineering, Management & Social Sciences') }}</small>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('editorial-board') ? 'active' : '' }}" href="{{ route('editorial-board') }}">Editorial Team</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->routeIs('call-for-papers') || request()->routeIs('author-guidelines') || request()->routeIs('research-areas') ? 'active' : '' }}" href="#" data-bs-toggle="dropdown">For Authors</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('call-for-papers') }}"><i class="fas fa-bullhorn me-2 text-muted"></i>Call for Papers</a></li>
-                            <li><a class="dropdown-item" href="{{ route('author-guidelines') }}"><i class="fas fa-file-alt me-2 text-muted"></i>Author Guidelines</a></li>
-                            <li><a class="dropdown-item" href="{{ route('research-areas') }}"><i class="fas fa-microscope me-2 text-muted"></i>Subject Areas</a></li>
-                            <li><a class="dropdown-item" href="{{ route('submission-workflow') }}"><i class="fas fa-tasks me-2 text-muted"></i>Submission Workflow</a></li>
-                            <li><a class="dropdown-item" href="{{ route('apc') }}"><i class="fas fa-coins me-2 text-muted"></i>Publication Charges</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/downloads/copyright-form.pdf"><i class="fas fa-file-contract me-2 text-muted"></i>Copyright Form Download</a></li>
-                            <li><a class="dropdown-item" href="/downloads/paper-format.docx"><i class="fas fa-file-word me-2 text-muted"></i>Paper Format Download</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('volumes.*') ? 'active' : '' }}" href="{{ route('volumes.index') }}">Archives</a></li>
-
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a></li>
+                    @if(isset($siteHeaderMenus) && $siteHeaderMenus->count())
+                        @foreach($siteHeaderMenus as $menuItem)
+                            @if($menuItem->children->count())
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                    @if($menuItem->icon)<i class="{{ $menuItem->icon }} me-1"></i>@endif{{ $menuItem->title }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach($menuItem->children as $child)
+                                    <li><a class="dropdown-item" href="{{ $child->resolved_url }}" target="{{ $child->target }}">@if($child->icon)<i class="{{ $child->icon }} me-2 text-muted"></i>@endif{{ $child->title }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ $menuItem->resolved_url }}" target="{{ $menuItem->target }}">
+                                    @if($menuItem->icon)<i class="{{ $menuItem->icon }} me-1"></i>@endif{{ $menuItem->title }}
+                                </a>
+                            </li>
+                            @endif
+                        @endforeach
+                    @else
+                        {{-- Default fallback menus --}}
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a></li>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('editorial-board') ? 'active' : '' }}" href="{{ route('editorial-board') }}">Editorial Team</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ request()->routeIs('call-for-papers') || request()->routeIs('author-guidelines') || request()->routeIs('research-areas') ? 'active' : '' }}" href="#" data-bs-toggle="dropdown">For Authors</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('call-for-papers') }}"><i class="fas fa-bullhorn me-2 text-muted"></i>Call for Papers</a></li>
+                                <li><a class="dropdown-item" href="{{ route('author-guidelines') }}"><i class="fas fa-file-alt me-2 text-muted"></i>Author Guidelines</a></li>
+                                <li><a class="dropdown-item" href="{{ route('research-areas') }}"><i class="fas fa-microscope me-2 text-muted"></i>Subject Areas</a></li>
+                                <li><a class="dropdown-item" href="{{ route('submission-workflow') }}"><i class="fas fa-tasks me-2 text-muted"></i>Submission Workflow</a></li>
+                                <li><a class="dropdown-item" href="{{ route('apc') }}"><i class="fas fa-coins me-2 text-muted"></i>Publication Charges</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/downloads/copyright-form.pdf"><i class="fas fa-file-contract me-2 text-muted"></i>Copyright Form Download</a></li>
+                                <li><a class="dropdown-item" href="/downloads/paper-format.docx"><i class="fas fa-file-word me-2 text-muted"></i>Paper Format Download</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('volumes.*') ? 'active' : '' }}" href="{{ route('volumes.index') }}">Archives</a></li>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a></li>
+                    @endif
                 </ul>
                 <div class="ms-lg-3">
                     @guest
@@ -304,52 +348,85 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h5><i class="fas fa-book-open me-2"></i>SHARE IJ</h5>
-                    <p class="small">Share International Journal of Sustainable Engineering, Management and Social Sciences is a multidisciplinary, peer-reviewed, open access journal published by Share Study Hub.</p>
-                    <p class="small mb-1"><i class="fas fa-globe me-2"></i>Country: India</p>
-                    <p class="small mb-1"><i class="fas fa-calendar me-2"></i>Frequency: Monthly e-Journal</p>
+                    <h5>
+                        @if(!empty($siteSettings['site_logo']))
+                            <img src="{{ asset('storage/' . $siteSettings['site_logo']) }}" alt="" style="max-height: 30px;" class="me-2">
+                        @else
+                            <i class="fas fa-book-open me-2"></i>
+                        @endif
+                        {{ $siteSettings['site_name'] ?? 'SHARE IJ' }}
+                    </h5>
+                    <p class="small">{{ $siteSettings['footer_about_text'] ?? ($siteSettings['site_description'] ?? 'Share International Journal of Sustainable Engineering, Management and Social Sciences is a multidisciplinary, peer-reviewed, open access journal published by Share Study Hub.') }}</p>
+                    <p class="small mb-1"><i class="fas fa-globe me-2"></i>Country: {{ $siteSettings['country'] ?? 'India' }}</p>
+                    <p class="small mb-1"><i class="fas fa-calendar me-2"></i>{{ $siteSettings['header_frequency'] ?? 'Frequency: Monthly e-Journal' }}</p>
                     <p class="small mb-0"><i class="fas fa-lock-open me-2"></i>Open Access</p>
                 </div>
-                <div class="col-md-2 mb-4">
-                    <h6>Quick Links</h6>
-                    <ul class="list-unstyled small">
-                        <li class="mb-1"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="mb-1"><a href="{{ route('about') }}">About Journal</a></li>
-                        <li class="mb-1"><a href="{{ route('editorial-board') }}">Editorial Team</a></li>
-                        <li class="mb-1"><a href="{{ route('volumes.index') }}">Archives</a></li>
-                        <li class="mb-1"><a href="{{ route('contact') }}">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h6>For Authors</h6>
-                    <ul class="list-unstyled small">
-                        <li class="mb-1"><a href="{{ route('call-for-papers') }}">Call for Papers</a></li>
-                        <li class="mb-1"><a href="{{ route('author-guidelines') }}">Author Guidelines</a></li>
-                        <li class="mb-1"><a href="{{ route('submission-workflow') }}">Submission Workflow</a></li>
-                        <li class="mb-1"><a href="{{ route('apc') }}">Publication Charges</a></li>
-                        <li class="mb-1"><a href="/downloads/copyright-form.pdf">Copyright Form</a></li>
-                        <li class="mb-1"><a href="/downloads/paper-format.docx">Paper Format</a></li>
-                        <li class="mb-1"><a href="{{ route('register') }}">Submit Paper</a></li>
-                    </ul>
-                </div>
+                @if(isset($siteFooterMenus) && $siteFooterMenus->count())
+                    @foreach($siteFooterMenus as $footerGroup)
+                    <div class="col-md-2 mb-4">
+                        <h6>{{ $footerGroup->title }}</h6>
+                        @if($footerGroup->children->count())
+                        <ul class="list-unstyled small">
+                            @foreach($footerGroup->children as $fChild)
+                            <li class="mb-1"><a href="{{ $fChild->resolved_url }}" target="{{ $fChild->target }}">{{ $fChild->title }}</a></li>
+                            @endforeach
+                        </ul>
+                        @endif
+                    </div>
+                    @endforeach
+                @else
+                    {{-- Default fallback footer --}}
+                    <div class="col-md-2 mb-4">
+                        <h6>Quick Links</h6>
+                        <ul class="list-unstyled small">
+                            <li class="mb-1"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="mb-1"><a href="{{ route('about') }}">About Journal</a></li>
+                            <li class="mb-1"><a href="{{ route('editorial-board') }}">Editorial Team</a></li>
+                            <li class="mb-1"><a href="{{ route('volumes.index') }}">Archives</a></li>
+                            <li class="mb-1"><a href="{{ route('contact') }}">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <h6>For Authors</h6>
+                        <ul class="list-unstyled small">
+                            <li class="mb-1"><a href="{{ route('call-for-papers') }}">Call for Papers</a></li>
+                            <li class="mb-1"><a href="{{ route('author-guidelines') }}">Author Guidelines</a></li>
+                            <li class="mb-1"><a href="{{ route('submission-workflow') }}">Submission Workflow</a></li>
+                            <li class="mb-1"><a href="{{ route('apc') }}">Publication Charges</a></li>
+                            <li class="mb-1"><a href="/downloads/copyright-form.pdf">Copyright Form</a></li>
+                            <li class="mb-1"><a href="/downloads/paper-format.docx">Paper Format</a></li>
+                            <li class="mb-1"><a href="{{ route('register') }}">Submit Paper</a></li>
+                        </ul>
+                    </div>
+                @endif
                 <div class="col-md-3 mb-4">
                     <h6>Contact</h6>
                     <ul class="list-unstyled small">
-                        <li class="mb-2"><i class="fas fa-envelope me-2"></i><a href="mailto:editor@shareij.org">editor@shareij.org</a></li>
-                        <li class="mb-2"><i class="fas fa-building me-2"></i>Share Study Hub</li>
-                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>121, Shripuram Colony, Gurjar Ki Thadi, Jaipur, India</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i><a href="mailto:{{ $siteSettings['footer_email'] ?? ($siteSettings['contact_email'] ?? 'editor@shareij.org') }}">{{ $siteSettings['footer_email'] ?? ($siteSettings['contact_email'] ?? 'editor@shareij.org') }}</a></li>
+                        <li class="mb-2"><i class="fas fa-building me-2"></i>{{ $siteSettings['footer_publisher_name'] ?? ($siteSettings['publisher_name'] ?? 'Share Study Hub') }}</li>
+                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>{{ $siteSettings['footer_address'] ?? ($siteSettings['address'] ?? '121, Shripuram Colony, Gurjar Ki Thadi, Jaipur, India') }}</li>
                     </ul>
                     <div class="d-flex gap-2">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-google-scholar"></i></a>
+                        @if(!empty($siteSettings['social_facebook']))<a href="{{ $siteSettings['social_facebook'] }}" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>@endif
+                        @if(!empty($siteSettings['social_twitter']))<a href="{{ $siteSettings['social_twitter'] }}" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>@endif
+                        @if(!empty($siteSettings['social_linkedin']))<a href="{{ $siteSettings['social_linkedin'] }}" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>@endif
+                        @if(!empty($siteSettings['social_scholar']))<a href="{{ $siteSettings['social_scholar'] }}" class="social-link" target="_blank"><i class="fab fa-google-scholar"></i></a>@endif
+                        @if(empty($siteSettings['social_facebook']) && empty($siteSettings['social_twitter']) && empty($siteSettings['social_linkedin']) && empty($siteSettings['social_scholar']))
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-google-scholar"></i></a>
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="footer-bottom text-center">
-                <p class="mb-0">&copy; {{ date('Y') }} Share International Journal of Sustainable Engineering, Management and Social Sciences. Published by <strong>Share Study Hub</strong>. All rights reserved.</p>
-                <p class="mb-0 mt-1" style="font-size:0.78rem;opacity:0.7"><i class="fas fa-shield-alt me-1"></i> @yield('footer_copyright', 'Content licensed under Creative Commons Attribution 4.0 International License.')</p>
+                @if(!empty($siteSettings['footer_copyright_text']))
+                    <p class="mb-0">{{ $siteSettings['footer_copyright_text'] }}</p>
+                @else
+                    <p class="mb-0">&copy; {{ date('Y') }} {{ $siteSettings['journal_full_title'] ?? 'Share International Journal of Sustainable Engineering, Management and Social Sciences' }}. Published by <strong>{{ $siteSettings['footer_publisher_name'] ?? ($siteSettings['publisher_name'] ?? 'Share Study Hub') }}</strong>. All rights reserved.</p>
+                @endif
+                <p class="mb-0 mt-1" style="font-size:0.78rem;opacity:0.7"><i class="fas fa-shield-alt me-1"></i> {{ $siteSettings['footer_license_text'] ?? 'Content licensed under Creative Commons Attribution 4.0 International License.' }}</p>
             </div>
         </div>
     </footer>
