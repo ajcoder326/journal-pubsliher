@@ -13,6 +13,9 @@
                     <!-- Header -->
                     <tr>
                         <td style="background-color: #0d6efd; padding: 30px; text-align: center;">
+                            @if(file_exists(public_path('images/share-ij-logo.png')))
+                                <img src="{{ asset('images/share-ij-logo.png') }}" alt="SHARE IJ" style="max-height: 60px; display: block; margin: 0 auto 10px;">
+                            @endif
                             <h1 style="color: #ffffff; margin: 0; font-size: 28px;">SHARE IJ</h1>
                         </td>
                     </tr>

@@ -25,11 +25,21 @@
                 <div class="mt-4">
                     <strong>Keywords:</strong> {{ $paper->keywords ?? 'None' }}
                 </div>
+                @if($paper->doi)
+                <div class="mt-3">
+                    <strong>DOI:</strong> <a href="https://doi.org/{{ $paper->doi }}" target="_blank">{{ $paper->doi }}</a>
+                </div>
+                @endif
                 
                 <div class="mt-4">
                     <a href="{{ route('admin.papers.download', $paper) }}" class="btn btn-outline-primary">
                         <i class="fas fa-download"></i> Download Manuscript
                     </a>
+                    @if($paper->final_document_path)
+                        <a href="{{ asset('storage/' . $paper->final_document_path) }}" class="btn btn-outline-success ms-2" target="_blank">
+                            <i class="fas fa-file-alt"></i> Final Manuscript
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

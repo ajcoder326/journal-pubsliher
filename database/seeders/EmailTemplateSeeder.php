@@ -20,13 +20,12 @@ class EmailTemplateSeeder extends Seeder
     <tr><td style="padding: 10px; background: #f8f9fa;"><strong>Previous Status:</strong></td><td style="padding: 10px;">{old_status}</td></tr>
     <tr><td style="padding: 10px; background: #f8f9fa;"><strong>New Status:</strong></td><td style="padding: 10px;"><strong style="color: #198754;">{new_status}</strong></td></tr>
 </table>
-<p>If your paper has been <strong>approved</strong>, please complete the following steps:</p>
-<ol>
-    <li>Download and fill the <strong>Copyright Form</strong></li>
-    <li>Prepare your final manuscript in the prescribed <strong>Paper Format</strong></li>
-    <li>Complete the <strong>Publication Fee Payment</strong></li>
-    <li>Submit all documents via your dashboard or email to editor@shareij.org</li>
-</ol>
+<p>Please complete the APC payment and submit the signed copyright form along with the final manuscript in the prescribed format, all available on your dashboard.</p>
+<ul>
+    <li><a href="{copyright_form_url}"><strong>Copyright Form Download</strong></a></li>
+    <li><a href="{paper_format_url}"><strong>Paper Format Download</strong></a></li>
+    <li><a href="{apc_url}"><strong>APC / Payment Details</strong></a></li>
+</ul>
 <p>You can view the full details and download forms from your dashboard.</p>
 <p><a href="{dashboard_url}" style="display: inline-block; padding: 10px 20px; background: #0d6efd; color: white; text-decoration: none; border-radius: 5px;">View Dashboard</a></p>
 <p>Best regards,<br>SHARE IJ Editorial Team</p>',

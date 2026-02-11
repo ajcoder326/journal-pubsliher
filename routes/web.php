@@ -71,6 +71,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         return view('dashboard.index', compact('papers'));
     })->name('index');
     Route::resource('papers', PaperController::class)->except(['show']);
+    Route::get('papers/{paper}/certificate', [PaperController::class, 'certificate'])->name('papers.certificate');
     Route::get('reviews', [App\Http\Controllers\ReviewController::class, 'index'])->name('reviews.index');
     Route::get('reviews/paper/{paper}', [App\Http\Controllers\ReviewController::class, 'create'])->name('reviews.create');
     Route::get('reviews/{review}', [App\Http\Controllers\ReviewController::class, 'show'])->name('reviews.show');

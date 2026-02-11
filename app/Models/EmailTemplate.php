@@ -28,7 +28,7 @@ class EmailTemplate extends Model
     {
         $placeholders = [
             'paper_status_changed' => [
-                '{author_name}', '{paper_title}', '{old_status}', '{new_status}', '{dashboard_url}'
+                '{author_name}', '{paper_title}', '{old_status}', '{new_status}', '{dashboard_url}', '{copyright_form_url}', '{paper_format_url}', '{apc_url}'
             ],
             'paper_submitted_author' => [
                 '{author_name}', '{paper_title}', '{authors}', '{submitted_date}', '{dashboard_url}'
@@ -37,7 +37,10 @@ class EmailTemplate extends Model
                 '{paper_title}', '{authors}', '{submitter_name}', '{submitter_email}', '{submitted_date}', '{abstract}', '{review_url}'
             ],
             'reviewer_assigned' => [
-                '{reviewer_name}', '{paper_title}', '{authors}', '{keywords}', '{abstract}', '{review_url}'
+                '{reviewer_name}', '{paper_title}', '{keywords}', '{abstract}', '{review_url}'
+            ],
+            'review_submitted' => [
+                '{reviewer_name}', '{paper_title}', '{recommendation}', '{review_url}'
             ],
         ];
 

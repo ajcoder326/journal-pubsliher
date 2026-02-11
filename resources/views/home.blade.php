@@ -8,14 +8,18 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-7">
+                @if(file_exists(public_path('images/share-ij-logo.png')))
+                    <img src="{{ asset('images/share-ij-logo.png') }}" alt="SHARE IJ" style="max-height: 70px;" class="mb-3">
+                @endif
                 <span class="badge bg-warning text-dark mb-3 px-3 py-2" style="font-size:0.85rem;">International | Open Access | Peer-Reviewed | Monthly e-Journal</span>
                 <h1 class="display-5 fw-bold mb-3">Share International Journal of Sustainable Engineering, Management &amp; Social Sciences</h1>
-                <p class="lead mb-2">A multidisciplinary, scholarly journal published by <strong>Share Study Hub</strong></p>
-                <p class="mb-4" style="opacity:0.85;">"Knowledge Shared is Knowledge Squared" &mdash; Providing a global platform for researchers, academicians, and practitioners to disseminate original research and interdisciplinary perspectives.</p>
+                <p class="lead mb-2">SHARE International Journal of Sustainable Engineering, Management &amp; Social Sciences is a multidisciplinary scholarly e-journal dedicated to advancing high-quality, peer-reviewed research.</p>
+                <p class="mb-4" style="opacity:0.85;">Guided by the vision "Knowledge Shared is Knowledge Squared," the journal provides a global platform for disseminating original research, innovative ideas, and interdisciplinary perspectives. It aims to promote academic excellence, research integrity, and sustainable development through meaningful scholarly exchange.</p>
                 <div class="d-flex flex-wrap gap-2">
                     <a href="{{ route('register') }}" class="btn btn-accent btn-lg"><i class="fas fa-paper-plane me-2"></i>Submit Manuscript</a>
                     <a href="{{ route('call-for-papers') }}" class="btn btn-outline-light btn-lg"><i class="fas fa-bullhorn me-2"></i>Call for Papers</a>
                     <a href="{{ route('volumes.index') }}" class="btn btn-outline-light btn-lg"><i class="fas fa-archive me-2"></i>Browse Archive</a>
+                    <a href="{{ route('author-guidelines') }}" class="btn btn-outline-light btn-lg"><i class="fas fa-file-alt me-2"></i>For Authors</a>
                 </div>
             </div>
             <div class="col-lg-5 d-none d-lg-block text-center">
@@ -215,6 +219,7 @@
                             <li>Doctoral degree or equivalent experience</li>
                             <li>Active involvement in research or teaching</li>
                             <li>At least two publications in peer-reviewed journals</li>
+                            <li>Commitment to ethical and unbiased review</li>
                         </ul>
                         <p class="small mb-0"><strong>Apply:</strong> Send CV to <a href="mailto:editor@shareij.org">editor@shareij.org</a></p>
                     </div>
@@ -229,6 +234,7 @@
                             <li>Ph.D. or equivalent qualification in a relevant discipline</li>
                             <li>Strong research and publication record</li>
                             <li>Prior experience in peer review or editorial roles (preferred)</li>
+                            <li>Demonstrated academic integrity and leadership</li>
                         </ul>
                         <p class="small mb-0"><strong>Apply:</strong> Send CV to <a href="mailto:editor@shareij.org">editor@shareij.org</a></p>
                     </div>

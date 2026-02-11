@@ -63,6 +63,7 @@
                         <i class="fas fa-building text-primary me-2"></i>
                         <strong>Publisher:</strong><br>
                         Share Study Hub<br>
+                        <small class="text-muted">121, Shripuram Colony, Gurjar Ki Thadi, Jaipur, India</small><br>
                         <small class="text-muted">Est. 2010 &ndash; "A Study Hub for Analysis, Research & Evaluation"</small>
                     </li>
                     <li class="mb-0">

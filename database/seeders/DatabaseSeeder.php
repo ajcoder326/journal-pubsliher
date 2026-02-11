@@ -159,7 +159,7 @@ class DatabaseSeeder extends Seeder
         EmailTemplate::create([
             "name" => "paper_status_changed",
             "subject" => "Paper Status Update - {paper_title}",
-            "body" => "<h2>Paper Status Update</h2><p>Dear {author_name},</p><p>The status of your paper <strong>{paper_title}</strong> has been updated.</p><p><strong>Previous Status:</strong> {old_status}<br><strong>New Status:</strong> {new_status}</p><p>You can view more details in your <a href=\"{dashboard_url}\">Dashboard</a>.</p><p>If you have any questions, please contact our editorial team.</p><p>Best regards,<br>SHARE IJ Editorial Team</p>",
+            "body" => "<h2>Paper Status Update</h2><p>Dear {author_name},</p><p>The status of your paper <strong>{paper_title}</strong> has been updated.</p><p><strong>Previous Status:</strong> {old_status}<br><strong>New Status:</strong> {new_status}</p><p>Please complete the APC payment and submit the signed copyright form along with the final manuscript in the prescribed format, all available on your dashboard.</p><ul><li><a href=\"{copyright_form_url}\"><strong>Copyright Form Download</strong></a></li><li><a href=\"{paper_format_url}\"><strong>Paper Format Download</strong></a></li><li><a href=\"{apc_url}\"><strong>APC / Payment Details</strong></a></li></ul><p>You can view more details in your <a href=\"{dashboard_url}\">Dashboard</a>.</p><p>If you have any questions, please contact our editorial team.</p><p>Best regards,<br>SHARE IJ Editorial Team</p>",
             "description" => "Sent to author when paper status changes",
             "is_active" => true,
         ]);
@@ -167,7 +167,7 @@ class DatabaseSeeder extends Seeder
         EmailTemplate::create([
             "name" => "reviewer_assigned",
             "subject" => "Review Request - {paper_title}",
-            "body" => "<h2>Review Request</h2><p>Dear {reviewer_name},</p><p>You have been assigned to review the following paper:</p><p><strong>Title:</strong> {paper_title}<br><strong>Authors:</strong> {authors}<br><strong>Keywords:</strong> {keywords}</p><p><strong>Abstract:</strong></p><p>{abstract}</p><p><a href=\"{review_url}\">Access the paper for review</a></p><p>Please complete your review within 21 days.</p><p>Best regards,<br>SHARE IJ Editorial Team</p>",
+            "body" => "<h2>Review Request</h2><p>Dear {reviewer_name},</p><p>You have been assigned to review the following paper:</p><p><strong>Title:</strong> {paper_title}<br><strong>Keywords:</strong> {keywords}</p><p><strong>Abstract:</strong></p><p>{abstract}</p><p><a href=\"{review_url}\">Access the paper for review</a></p><p>Please complete your review within 21 days.</p><p>Best regards,<br>SHARE IJ Editorial Team</p>",
             "description" => "Sent to reviewer when assigned to review a paper",
             "is_active" => true,
         ]);

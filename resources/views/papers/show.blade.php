@@ -25,7 +25,10 @@
                     @if($paper->keywords)
                         <p class="mb-1"><strong>Keywords:</strong> {{ $paper->keywords }}</p>
                     @endif
-                    <p class="mb-1"><strong>Published:</strong> {{ $paper->created_at->format('F d, Y') }}</p>
+                    @if($paper->doi)
+                        <p class="mb-1"><strong>DOI:</strong> <a href="https://doi.org/{{ $paper->doi }}" target="_blank">{{ $paper->doi }}</a></p>
+                    @endif
+                    <p class="mb-1"><strong>Published:</strong> {{ ($paper->published_at ?? $paper->created_at)->format('F d, Y') }}</p>
                     @if($paper->volume)
                         <p class="mb-1"><strong>Volume:</strong> {{ $paper->volume->title }}</p>
                     @endif
@@ -63,7 +66,7 @@
                         <li class="mb-2">
                             <i class="fas fa-calendar me-2 text-muted"></i>
                             <strong>Published:</strong><br>
-                            <span class="ms-4">{{ $paper->created_at->format('F d, Y') }}</span>
+                            <span class="ms-4">{{ ($paper->published_at ?? $paper->created_at)->format('F d, Y') }}</span>
                         </li>
                         @if($paper->volume)
                             <li class="mb-2">
@@ -82,6 +85,13 @@
                                 <i class="fas fa-tags me-2 text-muted"></i>
                                 <strong>Keywords:</strong><br>
                                 <span class="ms-4">{{ $paper->keywords }}</span>
+                            </li>
+                        @endif
+                        @if($paper->doi)
+                            <li class="mb-0 mt-2">
+                                <i class="fas fa-link me-2 text-muted"></i>
+                                <strong>DOI:</strong><br>
+                                <a href="https://doi.org/{{ $paper->doi }}" target="_blank" class="ms-4">{{ $paper->doi }}</a>
                             </li>
                         @endif
                     </ul>

@@ -12,19 +12,28 @@
     <div class="card">
         <div class="card-body">
             <table class="table">
-                <thead><tr><th>Title</th><th>Status</th><th>Submitted</th><th>Actions</th></tr></thead>
+                <thead><tr><th>Title</th><th>Status</th><th>Submitted</th></tr></thead>
                 <tbody>
                     @forelse($papers as $paper)
                         <tr>
-                            <td>{{ Str::limit($paper->title, 50) }}</td>
-                            <td><span class="badge bg-{{ $paper->status == 'published' ? 'success' : ($paper->status == 'pending' ? 'warning' : 'secondary') }}">{{ ucfirst($paper->status) }}</span></td>
-                            <td>{{ $paper->created_at->format('M d, Y') }}</td>
                             <td>
-                                <a href="{{ route('dashboard.papers.edit', $paper) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                @if($paper->status === 'published')
+                                    <a href="{{ route('papers.show', $paper) }}">{{ Str::limit($paper->title, 50) }}</a>
+                                @else
+                                    <a href="{{ route('dashboard.papers.edit', $paper) }}">{{ Str::limit($paper->title, 50) }}</a>
+                                @endif
                             </td>
+                            <td>
+                                <span class="badge bg-{{ $paper->status == 'published' ? 'success' : ($paper->status == 'pending' ? 'warning' : 'secondary') }}">{{ ucfirst($paper->status) }}</span>
+                                @if($paper->status === 'published')
+                                    <div class="small mt-1"><a href="{{ route('papers.show', $paper) }}">View Published Paper</a></div>
+                                    <div class="small"><a href="{{ route('dashboard.papers.certificate', $paper) }}">Download Certificate</a></div>
+                                @endif
+                            </td>
+                            <td>{{ $paper->created_at->format('M d, Y') }}</td>
                         </tr>
                     @empty
-                        <tr><td colspan="4" class="text-center">No papers yet.</td></tr>
+                        <tr><td colspan="3" class="text-center">No papers yet.</td></tr>
                     @endforelse
                 </tbody>
             </table>

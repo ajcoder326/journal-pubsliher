@@ -23,7 +23,7 @@
                 <h5 class="mb-2"><i class="fas fa-history me-2 text-primary"></i>Our Legacy</h5>
                 <p class="mb-2">Since its inception, Share Study Hub has been actively engaged in supporting academic research and publication across diverse disciplines. The publisher has contributed through its established print journals:</p>
                 <ul class="mb-0">
-                    <li><strong>Share Journal of Multidisciplinary Research and Studies</strong> &mdash; ISSN: 0976-4712 (Print) / UGC Approved Journal No. 42613</li>
+                    <li><strong>Share Journal of Multidisciplinary Research and Studies</strong> &mdash; ISSN: 0976-4712 (Print) / Previous UGC Approved Journal No. 42613</li>
                     <li><strong>Journal of Multidisciplinary Research</strong> &mdash; ISSN: 2229-5003 (Print)</li>
                 </ul>
             </div>
@@ -58,7 +58,7 @@
                 <h5><i class="fas fa-list-check me-2"></i>Journal at a Glance</h5>
                 <table class="table table-sm table-borderless mb-0">
                     <tr><td class="fw-semibold">Publisher</td><td>Share Study Hub</td></tr>
-                    <tr><td class="fw-semibold">Established</td><td>Share Study Hub</td></tr>
+                    <tr><td class="fw-semibold">Established</td><td>2026</td></tr>
                     <tr><td class="fw-semibold">Frequency</td><td>Monthly e-Journal</td></tr>
                     <tr><td class="fw-semibold">Language</td><td>English & Hindi</td></tr>
                     <tr><td class="fw-semibold">ISSN</td><td>Applied</td></tr>

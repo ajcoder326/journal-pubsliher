@@ -75,7 +75,7 @@
                             <option value="rejected" {{ $paper->status == 'rejected' ? 'selected' : '' }}>Review Done - Rejected</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Update Paper</button>
+                    <button type="submit" class="btn btn-primary w-100">Update Status</button>
                 </form>
             </div>
         </div>

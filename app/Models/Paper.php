@@ -10,7 +10,7 @@ class Paper extends Model
 {
     protected $fillable = [
         'user_id', 'volume_id', 'title', 'abstract', 'authors',
-        'keywords', 'document_path', 'status', 'submitted_at', 'published_at',
+        'keywords', 'doi', 'document_path', 'final_document_path', 'status', 'submitted_at', 'published_at',
     ];
 
     protected $casts = [

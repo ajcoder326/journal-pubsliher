@@ -14,9 +14,90 @@ use Illuminate\Support\Str;
 
 class PaperController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $papers = Paper::with(['user', 'volume'])->orderBy('created_at', 'desc')->paginate(15);
+        $query = Paper::with(['user', 'volume', 'assignedReviewers.user'])->orderBy('created_at', 'desc');
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('q')) {
+            $search = $request->q;
+            $query->where(function ($subQuery) use ($search) {
+                $subQuery->where('title', 'like', "%{$search}%")
+                    ->orWhere('authors', 'like', "%{$search}%")
+                    ->orWhereHas('user', function ($userQuery) use ($search) {
+                        $userQuery->where('name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%")
+                            ->orWhere('phone', 'like', "%{$search}%")
+                            ->orWhere('affiliation', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        if ($request->filled('from_date')) {
+            $query->whereDate('created_at', '>=', $request->from_date);
+        }
+
+        if ($request->filled('to_date')) {
+            $query->whereDate('created_at', '<=', $request->to_date);
+        }
+
+        if ($request->boolean('export')) {
+            $papers = $query->get();
+
+            $headers = [
+                'Content-Type' => 'text/csv',
+                'Content-Disposition' => 'attachment; filename="papers-export.csv"',
+            ];
+
+            return response()->streamDownload(function () use ($papers) {
+                $output = fopen('php://output', 'w');
+                fputcsv($output, [
+                    'Sr No',
+                    'Paper ID',
+                    'Title',
+                    'Status',
+                    'Author Name',
+                    'Author Email',
+                    'Mobile No',
+                    'Affiliation',
+                    'Submitted Date',
+                    'Reviewer Names',
+                    'Reviewer Emails',
+                ]);
+
+                foreach ($papers as $index => $paper) {
+                    $reviewerNames = $paper->assignedReviewers
+                        ->pluck('user.name')
+                        ->filter()
+                        ->implode('; ');
+                    $reviewerEmails = $paper->assignedReviewers
+                        ->pluck('user.email')
+                        ->filter()
+                        ->implode('; ');
+
+                    fputcsv($output, [
+                        $index + 1,
+                        $paper->id,
+                        $paper->title,
+                        $paper->status,
+                        $paper->user->name ?? 'N/A',
+                        $paper->user->email ?? 'N/A',
+                        $paper->user->phone ?? 'N/A',
+                        $paper->user->affiliation ?? 'N/A',
+                        $paper->created_at?->format('Y-m-d') ?? '',
+                        $reviewerNames,
+                        $reviewerEmails,
+                    ]);
+                }
+
+                fclose($output);
+            }, 'papers-export.csv', $headers);
+        }
+
+        $papers = $query->paginate(15)->withQueryString();
         return view('admin.papers.index', compact('papers'));
     }
 
@@ -39,12 +120,21 @@ class PaperController extends Controller
             'title' => 'required|max:255',
             'status' => 'required|in:pending,in_review,correction_needed,approved,rejected,published',
             'volume_id' => 'nullable|exists:volumes,id',
+            'doi' => 'nullable|string|max:255',
         ]);
 
         $oldStatus = $paper->status;
         $newStatus = $validated['status'];
 
         $paper->update($validated);
+
+        if ($oldStatus !== $newStatus) {
+            if ($newStatus === 'published') {
+                $paper->update(['published_at' => now()]);
+            } elseif ($oldStatus === 'published') {
+                $paper->update(['published_at' => null]);
+            }
+        }
 
         // Send email notification if status changed
         if ($oldStatus !== $newStatus) {

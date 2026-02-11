@@ -49,21 +49,39 @@ class ReviewController extends Controller
         abort_if(!$assignment, 403, 'You are not assigned as a reviewer for this paper.');
 
         $validated = $request->validate([
+            'comment_preset' => 'required|in:comment_1,comment_2,comment_3,comment_4,other',
             'comments' => 'required',
+            'other_comments' => 'nullable|string',
             'recommendation' => 'required|in:accept,minor_revision,major_revision,reject',
         ]);
 
+        $comments = $validated['comments'];
+        if ($validated['comment_preset'] === 'other' && !empty($validated['other_comments'])) {
+            $comments = $validated['other_comments'];
+        }
+
         $paper->reviews()->create([
             'user_id' => auth()->id(),
-            'comments' => $validated['comments'],
+            'comments' => $comments,
             'recommendation' => $validated['recommendation'],
         ]);
 
         // Update reviewer assignment status
         $assignment->update(['status' => 'completed']);
 
+        // Update paper status based on recommendation
+        $statusMap = [
+            'accept' => 'approved',
+            'minor_revision' => 'correction_needed',
+            'major_revision' => 'correction_needed',
+            'reject' => 'rejected',
+        ];
+        if (isset($statusMap[$validated['recommendation']])) {
+            $paper->update(['status' => $statusMap[$validated['recommendation']]]);
+        }
+
         // Notify about review submission
-        NotificationService::notifyReviewSubmitted($paper, auth()->user());
+        NotificationService::notifyReviewSubmitted($paper, auth()->user(), $validated['recommendation']);
 
         return redirect()->route('dashboard.reviews.index')->with('success', 'Review submitted successfully!');
     }

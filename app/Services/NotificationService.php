@@ -103,6 +103,9 @@ class NotificationService
             'paper_title' => $paper->title,
             'old_status' => ucfirst(str_replace('_', ' ', $oldStatus)),
             'new_status' => ucfirst(str_replace('_', ' ', $newStatus)),
+            'copyright_form_url' => url('/downloads/copyright-form.pdf'),
+            'paper_format_url' => url('/downloads/paper-format.docx'),
+            'apc_url' => url('/article-processing-charges'),
         ]);
     }
 
@@ -123,7 +126,7 @@ class NotificationService
     /**
      * Notify editors when a review is submitted
      */
-    public static function notifyReviewSubmitted(Paper $paper, User $reviewer): void
+    public static function notifyReviewSubmitted(Paper $paper, User $reviewer, string $recommendation): void
     {
         $editors = User::whereIn('role', ['editor', 'editor_in_chief', 'admin'])->get();
 
@@ -132,6 +135,7 @@ class NotificationService
                 'editor_name' => $editor->name,
                 'reviewer_name' => $reviewer->name,
                 'paper_title' => $paper->title,
+                'recommendation' => ucfirst(str_replace('_', ' ', $recommendation)),
                 'review_url' => url('/admin/papers/' . $paper->id),
             ]);
         }

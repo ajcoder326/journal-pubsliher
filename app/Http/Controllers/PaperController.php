@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paper;
 use App\Models\Volume;
 use App\Services\NotificationService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -94,7 +95,13 @@ class PaperController extends Controller
             'abstract' => 'required',
             'authors' => 'required',
             'keywords' => 'nullable',
+            'final_document' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
         ]);
+
+        if ($request->hasFile('final_document')) {
+            $finalPath = $request->file('final_document')->store('final-papers', 'public');
+            $validated['final_document_path'] = $finalPath;
+        }
 
         $paper->update($validated);
         return redirect()->route('dashboard.papers.index')->with('success', 'Paper updated!');
@@ -105,5 +112,22 @@ class PaperController extends Controller
         abort_if($paper->user_id !== auth()->id(), 403);
         $paper->delete();
         return redirect()->route('dashboard.papers.index')->with('success', 'Paper deleted!');
+    }
+
+    public function certificate(Paper $paper)
+    {
+        abort_if($paper->user_id !== auth()->id(), 403);
+
+        if ($paper->status !== 'published') {
+            abort(403, 'Certificate is available only after publication.');
+        }
+
+        $pdf = Pdf::loadView('certificates.publication', [
+            'paper' => $paper,
+            'author' => $paper->user,
+        ])->setPaper('A4', 'landscape');
+
+        $fileName = 'publication-certificate-' . $paper->id . '.pdf';
+        return $pdf->download($fileName);
     }
 }

@@ -72,13 +72,13 @@
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="#" class="btn btn-outline-success w-100" onclick="alert('Publication certificates are available after your paper is published. Contact editor@shareij.org for assistance.'); return false;">
+                            <a href="{{ route('dashboard.papers.index') }}" class="btn btn-outline-primary w-100">
                                 <i class="fas fa-certificate d-block mb-1" style="font-size:1.5rem;"></i>
-                                Publication Certificate
+                                Get Certificate
                             </a>
                         </div>
                         <div class="col-md-3">
-                            <a href="{{ route('apc') }}" class="btn btn-outline-warning w-100">
+                            <a href="{{ route('apc') }}" class="btn btn-outline-primary w-100">
                                 <i class="fas fa-credit-card d-block mb-1" style="font-size:1.5rem;"></i>
                                 Payment Options
                             </a>
@@ -97,18 +97,29 @@
                 <div class="card-body">
                     <table class="table">
                         <thead>
-                            <tr><th>Title</th><th>Status</th><th>Submitted</th><th>Actions</th></tr>
+                            <tr><th>Title</th><th>Status</th><th>Submitted</th></tr>
                         </thead>
                         <tbody>
                             @forelse(auth()->user()->papers->take(5) as $paper)
                                 <tr>
-                                    <td>{{ Str::limit($paper->title, 40) }}</td>
-                                    <td><span class="badge bg-{{ $paper->status == 'published' ? 'success' : ($paper->status == 'pending' ? 'warning' : 'secondary') }}">{{ ucfirst($paper->status) }}</span></td>
+                                    <td>
+                                        @if($paper->status === 'published')
+                                            <a href="{{ route('papers.show', $paper) }}">{{ Str::limit($paper->title, 40) }}</a>
+                                        @else
+                                            <a href="{{ route('dashboard.papers.edit', $paper) }}">{{ Str::limit($paper->title, 40) }}</a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-{{ $paper->status == 'published' ? 'success' : ($paper->status == 'pending' ? 'warning' : 'secondary') }}">{{ ucfirst($paper->status) }}</span>
+                                        @if($paper->status === 'published')
+                                            <div class="small mt-1"><a href="{{ route('papers.show', $paper) }}">View Published Paper</a></div>
+                                            <div class="small"><a href="{{ route('dashboard.papers.certificate', $paper) }}">Download Certificate</a></div>
+                                        @endif
+                                    </td>
                                     <td>{{ $paper->created_at->format('M d, Y') }}</td>
-                                    <td><a href="{{ route('dashboard.papers.edit', $paper) }}" class="btn btn-sm btn-outline-primary">View</a></td>
                                 </tr>
                             @empty
-                                <tr><td colspan="4" class="text-center">No papers submitted yet. <a href="{{ route('dashboard.papers.create') }}">Submit your first paper!</a></td></tr>
+                                <tr><td colspan="3" class="text-center">No papers submitted yet. <a href="{{ route('dashboard.papers.create') }}">Submit your first paper!</a></td></tr>
                             @endforelse
                         </tbody>
                     </table>

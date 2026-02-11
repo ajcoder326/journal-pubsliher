@@ -19,6 +19,11 @@
                         @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">DOI</label>
+                        <input type="text" name="doi" class="form-control @error('doi') is-invalid @enderror" value="{{ old('doi', $paper->doi) }}" placeholder="10.xxxx/xxxx">
+                        @error('doi')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">Authors</label>
                         <input type="text" class="form-control" value="{{ $paper->authors }}" disabled>
                     </div>
@@ -64,6 +69,11 @@
                     @if($paper->document_path)
                     <a href="{{ route('admin.papers.download', $paper) }}" class="btn btn-outline-primary w-100 mb-3">
                         <i class="fas fa-download"></i> Download Document
+                    </a>
+                    @endif
+                    @if($paper->final_document_path)
+                    <a href="{{ asset('storage/' . $paper->final_document_path) }}" class="btn btn-outline-success w-100 mb-3" target="_blank">
+                        <i class="fas fa-file-alt"></i> Download Final Manuscript
                     </a>
                     @endif
                 </div>

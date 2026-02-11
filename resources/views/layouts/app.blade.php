@@ -37,13 +37,15 @@
 
         * { box-sizing: border-box; }
 
+        img, svg { max-width: 100%; height: auto; }
+
         html, body { overflow-x: hidden; max-width: 100vw; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text-dark);
             background: #fff;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
@@ -60,7 +62,7 @@
 
         /* Navbar */
         .navbar { background: #fff; border-bottom: 2px solid var(--secondary); }
-        .navbar-brand { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: var(--primary) !important; line-height: 1.3; }
+        .navbar-brand { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: var(--primary) !important; line-height: 1.3; white-space: normal; word-break: break-word; }
         .navbar-brand small { display: block; font-family: 'Inter', sans-serif; font-size: 0.55rem; font-weight: 400; letter-spacing: 0.5px; color: var(--text-muted); text-transform: uppercase; }
         .nav-link { font-weight: 500; font-size: 0.88rem; padding: 0.5rem 0.75rem !important; color: var(--text-dark) !important; position: relative; transition: color 0.2s; }
         .nav-link:hover, .nav-link.active { color: var(--accent) !important; }
@@ -241,6 +243,8 @@
             <a class="navbar-brand" href="{{ route('home') }}">
                 @if(!empty($siteSettings['site_logo']))
                     <img src="{{ asset('storage/' . $siteSettings['site_logo']) }}" alt="{{ $siteSettings['header_brand_name'] ?? 'SHARE IJ' }}" style="max-height: 50px;" class="me-2">
+                @elseif(file_exists(public_path('images/share-ij-logo.png')))
+                    <img src="{{ asset('images/share-ij-logo.png') }}" alt="{{ $siteSettings['header_brand_name'] ?? 'SHARE IJ' }}" style="max-height: 50px;" class="me-2">
                 @else
                     <i class="fas fa-book-open me-2 text-primary"></i>
                 @endif
@@ -276,8 +280,8 @@
                     @else
                         {{-- Default fallback menus --}}
                         <li class="nav-item"><a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a></li>
-                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('editorial-board') ? 'active' : '' }}" href="{{ route('editorial-board') }}">Editorial Team</a></li>
+                                <li class="nav-item"><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a></li>
+                                <li class="nav-item"><a class="nav-link {{ request()->routeIs('editorial-board') ? 'active' : '' }}" href="{{ route('editorial-board') }}">Editorial Board</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle {{ request()->routeIs('call-for-papers') || request()->routeIs('author-guidelines') || request()->routeIs('research-areas') ? 'active' : '' }}" href="#" data-bs-toggle="dropdown">For Authors</a>
                             <ul class="dropdown-menu">
@@ -351,6 +355,8 @@
                     <h5>
                         @if(!empty($siteSettings['site_logo']))
                             <img src="{{ asset('storage/' . $siteSettings['site_logo']) }}" alt="" style="max-height: 30px;" class="me-2">
+                        @elseif(file_exists(public_path('images/share-ij-logo.png')))
+                            <img src="{{ asset('images/share-ij-logo.png') }}" alt="" style="max-height: 30px;" class="me-2">
                         @else
                             <i class="fas fa-book-open me-2"></i>
                         @endif
@@ -381,7 +387,7 @@
                         <ul class="list-unstyled small">
                             <li class="mb-1"><a href="{{ route('home') }}">Home</a></li>
                             <li class="mb-1"><a href="{{ route('about') }}">About Journal</a></li>
-                            <li class="mb-1"><a href="{{ route('editorial-board') }}">Editorial Team</a></li>
+                            <li class="mb-1"><a href="{{ route('editorial-board') }}">Editorial Board</a></li>
                             <li class="mb-1"><a href="{{ route('volumes.index') }}">Archives</a></li>
                             <li class="mb-1"><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
