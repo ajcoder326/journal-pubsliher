@@ -357,11 +357,11 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     @if(file_exists(public_path('images/share-ij-footer-logo.png')))
-                        <img src="{{ asset('images/share-ij-footer-logo.png') }}" alt="" style="max-height: 40px;" class="me-2">
+                        <img src="{{ asset('images/share-ij-footer-logo.png') }}" alt="" style="max-height: 70px;" class="me-2">
                     @elseif(!empty($siteSettings['site_logo']))
-                        <img src="{{ asset('storage/' . $siteSettings['site_logo']) }}" alt="" style="max-height: 40px;" class="me-2">
+                        <img src="{{ asset('storage/' . $siteSettings['site_logo']) }}" alt="" style="max-height: 70px;" class="me-2">
                     @elseif(file_exists(public_path('images/share-ij-logo.png')))
-                        <img src="{{ asset('images/share-ij-logo.png') }}" alt="" style="max-height: 40px;" class="me-2">
+                        <img src="{{ asset('images/share-ij-logo.png') }}" alt="" style="max-height: 70px;" class="me-2">
                     @endif
                 </div>
                 @if(isset($siteFooterMenus) && $siteFooterMenus->count())
