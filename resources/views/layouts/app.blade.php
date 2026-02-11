@@ -91,6 +91,9 @@
             border-radius: 50%;
         }
         .hero-section .lead { font-size: 1.1rem; opacity: 0.9; }
+        .hero-section .badge { white-space: normal; line-height: 1.2; max-width: 100%; }
+        .hero-section h1 { word-break: break-word; }
+        .hero-section .btn { white-space: normal; }
 
         /* Section */
         .section-title { position: relative; padding-bottom: 15px; margin-bottom: 35px; color: var(--primary); }
@@ -103,7 +106,8 @@
             color: #fff;
             padding: 50px 0 40px;
         }
-        .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; word-break: break-word; }
+        .breadcrumb { flex-wrap: wrap; }
         .page-header .breadcrumb { margin-bottom: 0; }
         .page-header .breadcrumb-item a { color: var(--secondary); text-decoration: none; }
         .page-header .breadcrumb-item.active { color: rgba(255,255,255,0.7); }

@@ -8,9 +8,6 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-7">
-                @if(file_exists(public_path('images/share-ij-logo.png')))
-                    <img src="{{ asset('images/share-ij-logo.png') }}" alt="SHARE IJ" style="max-height: 70px;" class="mb-3">
-                @endif
                 <span class="badge bg-warning text-dark mb-3 px-3 py-2" style="font-size:0.85rem;">International | Open Access | Peer-Reviewed | Monthly e-Journal</span>
                 <h1 class="display-5 fw-bold mb-3">Share International Journal of Sustainable Engineering, Management &amp; Social Sciences</h1>
                 <p class="lead mb-2">SHARE International Journal of Sustainable Engineering, Management &amp; Social Sciences is a multidisciplinary scholarly e-journal dedicated to advancing high-quality, peer-reviewed research.</p>
