@@ -247,9 +247,9 @@
                     <img src="{{ asset('images/share-ij-logo.png') }}" alt="{{ $siteSettings['header_brand_name'] ?? 'SHARE IJ' }}" style="max-height: 50px;" class="me-2">
                 @else
                     <i class="fas fa-book-open me-2 text-primary"></i>
+                    {{ $siteSettings['header_brand_name'] ?? ($siteSettings['site_name'] ?? 'SHARE IJ') }}
+                    <small>{{ $siteSettings['header_brand_subtitle'] ?? ($siteSettings['journal_full_title'] ?? 'Share International Journal of Sustainable Engineering, Management & Social Sciences') }}</small>
                 @endif
-                {{ $siteSettings['header_brand_name'] ?? ($siteSettings['site_name'] ?? 'SHARE IJ') }}
-                <small>{{ $siteSettings['header_brand_subtitle'] ?? ($siteSettings['journal_full_title'] ?? 'Share International Journal of Sustainable Engineering, Management & Social Sciences') }}</small>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
