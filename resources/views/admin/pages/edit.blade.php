@@ -74,20 +74,19 @@
 @endsection
 
 @section('scripts')
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/suneditor@2.47.5/dist/css/suneditor.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/suneditor@2.47.5/dist/suneditor.min.js"></script>
 <script>
-    $('#pageContent').summernote({
+    SunEditor.create(document.getElementById('pageContent'), {
         height: 350,
-        toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'italic', 'underline', 'clear']],
-            ['fontsize', ['fontsize']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'hr']],
-            ['view', ['fullscreen', 'codeview']]
+        buttonList: [
+            ['undo', 'redo'],
+            ['formatBlock', 'font', 'fontSize'],
+            ['bold', 'underline', 'italic', 'strike', 'removeFormat'],
+            ['fontColor', 'hiliteColor'],
+            ['align', 'list', 'indent', 'outdent'],
+            ['table', 'link', 'image', 'horizontalRule'],
+            ['codeView', 'fullScreen']
         ]
     });
 </script>

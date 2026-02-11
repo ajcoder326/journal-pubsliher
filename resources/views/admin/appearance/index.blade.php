@@ -30,6 +30,24 @@
                             <small class="text-muted">Recommended: PNG or SVG, max 2MB. Ideal height: 60-80px</small>
                         </div>
                     </div>
+                    <div class="row align-items-center mb-3">
+                        <div class="col-md-3 text-center">
+                            @if(!empty($settings['footer_logo']))
+                                <img src="{{ asset('storage/' . $settings['footer_logo']) }}" alt="Footer Logo" class="img-fluid mb-2" style="max-height: 80px;">
+                                <br>
+                                <label class="form-check-label small">
+                                    <input type="checkbox" name="remove_footer_logo" value="1" class="form-check-input"> Remove footer logo
+                                </label>
+                            @else
+                                <div class="p-3 bg-light rounded text-muted"><i class="fas fa-image fa-2x"></i><br><small>No footer logo</small></div>
+                            @endif
+                        </div>
+                        <div class="col-md-9">
+                            <label class="form-label">Upload Footer Logo</label>
+                            <input type="file" name="footer_logo" class="form-control" accept="image/*">
+                            <small class="text-muted">Recommended: PNG or SVG, max 2MB. Ideal height: 60-120px</small>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Upload Favicon</label>
                         <input type="file" name="site_favicon" class="form-control" accept=".png,.ico,.svg">

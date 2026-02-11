@@ -24,6 +24,13 @@ class AppearanceController extends Controller
             Setting::updateOrCreate(['key' => 'site_logo'], ['value' => $path]);
         }
 
+        // Handle footer logo upload
+        if ($request->hasFile('footer_logo')) {
+            $request->validate(['footer_logo' => 'image|mimes:png,jpg,jpeg,svg,webp|max:2048']);
+            $path = $request->file('footer_logo')->store('branding', 'public');
+            Setting::updateOrCreate(['key' => 'footer_logo'], ['value' => $path]);
+        }
+
         // Handle favicon upload
         if ($request->hasFile('site_favicon')) {
             $request->validate(['site_favicon' => 'image|mimes:png,ico,svg|max:512']);
@@ -38,6 +45,14 @@ class AppearanceController extends Controller
                 Storage::disk('public')->delete($current->value);
             }
             Setting::where('key', 'site_logo')->delete();
+        }
+
+        if ($request->has('remove_footer_logo')) {
+            $current = Setting::where('key', 'footer_logo')->first();
+            if ($current && $current->value) {
+                Storage::disk('public')->delete($current->value);
+            }
+            Setting::where('key', 'footer_logo')->delete();
         }
 
         // Save all other appearance settings
