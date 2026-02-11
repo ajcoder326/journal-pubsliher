@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -26,7 +27,14 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
             'role' => 'required|in:admin,editor,editor_in_chief,editorial_board,reviewer,author',
+            'affiliation' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:50',
+            'bio' => 'nullable|string',
+            'avatar' => 'nullable|image|max:2048',
         ]);
+        if ($request->hasFile('avatar')) {
+            $validated['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        }
         $validated['password'] = bcrypt($validated['password']);
         User::create($validated);
         return redirect()->route('admin.users.index')->with('success', 'User created.');
@@ -43,9 +51,16 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'role' => 'required|in:admin,editor,editor_in_chief,editorial_board,reviewer,author',
+            'affiliation' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:50',
+            'bio' => 'nullable|string',
+            'avatar' => 'nullable|image|max:2048',
         ]);
         if ($request->filled('password')) {
             $validated['password'] = bcrypt($request->password);
+        }
+        if ($request->hasFile('avatar')) {
+            $validated['avatar'] = $request->file('avatar')->store('avatars', 'public');
         }
         $user->update($validated);
         return redirect()->route('admin.users.index')->with('success', 'User updated.');

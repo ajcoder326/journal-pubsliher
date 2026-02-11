@@ -11,7 +11,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('admin.users.store') }}">
+                <form method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -57,6 +57,10 @@
                     <div class="mb-3">
                         <label class="form-label">Bio</label>
                         <textarea name="bio" class="form-control" rows="3">{{ old('bio') }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Photo</label>
+                        <input type="file" name="avatar" class="form-control" accept="image/*">
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create User</button>
                 </form>

@@ -356,20 +356,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h5>
-                        @if(!empty($siteSettings['site_logo']))
-                            <img src="{{ asset('storage/' . $siteSettings['site_logo']) }}" alt="" style="max-height: 30px;" class="me-2">
-                        @elseif(file_exists(public_path('images/share-ij-logo.png')))
-                            <img src="{{ asset('images/share-ij-logo.png') }}" alt="" style="max-height: 30px;" class="me-2">
-                        @else
-                            <i class="fas fa-book-open me-2"></i>
-                        @endif
-                        {{ $siteSettings['site_name'] ?? 'SHARE IJ' }}
-                    </h5>
-                    <p class="small">{{ $siteSettings['footer_about_text'] ?? ($siteSettings['site_description'] ?? 'Share International Journal of Sustainable Engineering, Management and Social Sciences is a multidisciplinary, peer-reviewed, open access journal published by Share Study Hub.') }}</p>
-                    <p class="small mb-1"><i class="fas fa-globe me-2"></i>Country: {{ $siteSettings['country'] ?? 'India' }}</p>
-                    <p class="small mb-1"><i class="fas fa-calendar me-2"></i>{{ $siteSettings['header_frequency'] ?? 'Frequency: Monthly e-Journal' }}</p>
-                    <p class="small mb-0"><i class="fas fa-lock-open me-2"></i>Open Access</p>
+                    @if(!empty($siteSettings['site_logo']))
+                        <img src="{{ asset('storage/' . $siteSettings['site_logo']) }}" alt="" style="max-height: 40px;" class="me-2">
+                    @elseif(file_exists(public_path('images/share-ij-logo.png')))
+                        <img src="{{ asset('images/share-ij-logo.png') }}" alt="" style="max-height: 40px;" class="me-2">
+                    @endif
                 </div>
                 @if(isset($siteFooterMenus) && $siteFooterMenus->count())
                     @foreach($siteFooterMenus as $footerGroup)

@@ -11,7 +11,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('admin.users.update', $user) }}">
+                <form method="POST" action="{{ route('admin.users.update', $user) }}" enctype="multipart/form-data">
                     @csrf @method('PUT')
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -57,6 +57,15 @@
                     <div class="mb-3">
                         <label class="form-label">Bio</label>
                         <textarea name="bio" class="form-control" rows="3">{{ old('bio', $user->bio) }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Photo</label>
+                        <input type="file" name="avatar" class="form-control" accept="image/*">
+                        @if($user->avatar)
+                            <div class="small mt-2">
+                                Current photo: <a href="{{ asset('storage/' . $user->avatar) }}" target="_blank">View</a>
+                            </div>
+                        @endif
                     </div>
                     <div class="mb-4">
                         <label class="form-label">Account Info</label>
