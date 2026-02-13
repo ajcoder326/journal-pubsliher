@@ -50,15 +50,18 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 // Dynamic CMS Pages (catch-all for custom pages - must be after all named routes)
 Route::get('/page/{page:slug}', function (\App\Models\Page $page) {
-    if (!$page->is_published) abort(404);
+    if (!$page->is_published)
+        abort(404);
     return view('pages.show', compact('page'));
 })->name('page.show');
 
 // Auth Routes
 Route::middleware('guest')->group(function () {
-    Route::get('/login', function () { return view('auth.login'); })->name('login');
+    Route::get('/login', function () {
+        return view('auth.login'); })->name('login');
     Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
-    Route::get('/register', function () { return view('auth.register'); })->name('register');
+    Route::get('/register', function () {
+        return view('auth.register'); })->name('register');
     Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 });
 
@@ -101,7 +104,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::patch('messages/{message}/read', [AdminMessage::class, 'markAsRead'])->name('messages.read');
     Route::get('settings', [AdminSetting::class, 'index'])->name('settings.index');
     Route::post('settings', [AdminSetting::class, 'update'])->name('settings.update');
-    
+
+    // Review Templates
+    Route::resource('review-templates', \App\Http\Controllers\Admin\ReviewTemplateController::class);
+
     // Email Templates
     Route::get('email-templates', [AdminEmailTemplate::class, 'index'])->name('email-templates.index');
     Route::get('email-templates/{emailTemplate}/edit', [AdminEmailTemplate::class, 'edit'])->name('email-templates.edit');
@@ -109,14 +115,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('email-templates/{emailTemplate}/preview', [AdminEmailTemplate::class, 'preview'])->name('email-templates.preview');
     Route::patch('email-templates/{emailTemplate}/toggle', [AdminEmailTemplate::class, 'toggleStatus'])->name('email-templates.toggle');
     Route::post('email-templates/{emailTemplate}/test', [AdminEmailTemplate::class, 'testEmail'])->name('email-templates.test');
-    
+
     // CMS - Pages
     Route::resource('pages', AdminPage::class);
-    
+
     // CMS - Menus
     Route::resource('menus', AdminMenu::class);
     Route::post('menus/reorder', [AdminMenu::class, 'reorder'])->name('menus.reorder');
-    
+
     // CMS - Appearance  
     Route::get('appearance', [AdminAppearance::class, 'index'])->name('appearance.index');
     Route::post('appearance', [AdminAppearance::class, 'update'])->name('appearance.update');

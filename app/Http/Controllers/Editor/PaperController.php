@@ -18,16 +18,21 @@ class PaperController extends Controller
     public function show(Paper $paper)
     {
         $paper->load(['reviews.user']);
-        return view('editor.papers.show', compact('paper'));
+        $reviewTemplates = \App\Models\ReviewTemplate::all();
+        return view('editor.papers.show', compact('paper', 'reviewTemplates'));
     }
 
     public function update(Request $request, Paper $paper)
     {
         $allowedStatuses = ['pending', 'in_review', 'correction_needed', 'approved', 'rejected'];
-        $request->validate(['status' => 'required|in:' . implode(',', $allowedStatuses)]);
+        $request->validate([
+            'status' => 'required|in:' . implode(',', $allowedStatuses),
+            'editor_feedback' => 'nullable|string',
+        ]);
 
         $paper->update([
             'status' => $request->status,
+            'editor_feedback' => $request->editor_feedback,
         ]);
 
         return redirect()->route('editor.papers.show', $paper)->with('success', 'Paper status updated successfully.');

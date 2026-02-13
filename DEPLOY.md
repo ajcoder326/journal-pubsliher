@@ -215,13 +215,14 @@ chmod -R 777 bootstrap/cache
 
 ---
 
-## Default Login Credentials (Full Demo Data)
+
+### Default Login Credentials (from DatabaseSeeder)
 
 | Role     | Email                   | Password      |
 |----------|-------------------------|---------------|
-| Admin    | admin@dejournal.com     | password123   |
-| Editor   | editor@dejournal.com    | password123   |
-| Reviewer | sarah@dejournal.com     | password123   |
-| Author   | author@dejournal.com    | password123   |
+| Admin    | admin@shareij.com       | password123   |
+| Editor   | editor@shareij.com      | password123   |
+| Reviewer | sarah@shareij.com       | password123   |
+| Author   | author@shareij.com      | password123   |
 
-> **Change these immediately after your first login!**
+> **Note:** Failed login? Run `php artisan db:seed` if the database is empty.
